@@ -1,0 +1,69 @@
+.started {
+    margin-right: 15px;
+}
+
+.navbar-nav{
+    gap: 50 px;
+}
+
+.hero-section{
+    background-color: rgb(71, 71, 216);
+}
+
+.hero-img{
+    margin-top: 8vh;
+}
+
+.nav-font{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(240, 209, 171);
+}
+
+.logo-name{
+        font-weight:bold;
+
+}
+
+
+
+
+.left-section{
+    margin-top: 18vh;
+    margin-left: 16vh;
+}
+
+.heading{
+    font-size:44px;
+    color: rgb(86, 86, 234);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.feature-heading{
+    margin-top:140px;
+}
+
+
+.d-flex {
+    gap: 1.5rem; /* Reduces unnecessary spacing */
+  }
+  
+  .card {
+    flex: 1 1 300px; /* Ensures cards take up equal space */
+    max-width: 350px; /* Prevents overly wide cards */
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      flex: 1 1 100%; /* Cards take full width on smaller screens */
+    }
+  }
+
+  .query-heading{
+    margin-top: 190px;
+  }
+  
