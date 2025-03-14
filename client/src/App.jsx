@@ -7,6 +7,7 @@ import Newpass from "./pages/auth/newpass/Newpass";
 import Login from "./pages/auth/login/Login";
 import Signup from "./pages/auth/signup/Signup";
 import Landing from "./pages/landing/Landing";
+import RecruiterForm from "./pages/rec_form/RecruiterForm";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/newpass" element={<Newpass />} />
           <Route path="/landing" element={<Landing />} />
+          <Route path="/rec_form" element={<RecruiterForm />}/>
         </Routes>
       </BrowserRouter>
     </>
