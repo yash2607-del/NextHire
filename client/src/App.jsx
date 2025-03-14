@@ -1,49 +1,27 @@
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
-import { BrowserRouter, Routes,Route} from 'react-router-dom';
-import Forgot from './pages/forgot/Forgot.jsx';
-import Newpass from './pages/newpass/Newpass.jsx';
-import Login from './pages/login/Login.jsx';
-import Signup from './pages/signup/Signup.jsx';
-import Landing from './pages/landing/landing.jsx';
-
-
-
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Forgot from "./pages/auth/forgot/Forgot";
+import Newpass from "./pages/auth/newpass/Newpass";
+import Login from "./pages/auth/login/Login";
+import Signup from "./pages/auth/signup/Signup";
+import Landing from "./pages/landing/Landing";
 
 function App() {
-
-  
-
-
   return (
     <>
-       <BrowserRouter>
-      
+      <BrowserRouter>
         <Routes>
-
-          <Route path='/signup' element={<Signup/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/forgot' element={<Forgot/>}/>
-          <Route path='/newpass' element={<Newpass/>}/>
-          <Route path='/landing' element={<Landing/>}/>
-
-          
-
-
-
-
-
-            
-        
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot" element={<Forgot />} />
+          <Route path="/newpass" element={<Newpass />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
-
-    
-       </BrowserRouter>
-
-     </>
-  )
+      </BrowserRouter>
+    </>
+  );
 }
 
-export default App
+export default App;
