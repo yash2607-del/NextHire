@@ -19,7 +19,7 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/newpass" element={<Newpass />} />
           <Route path="/landing" element={<Landing />} />
-          <Route path="/rec_form" element={<RecruiterForm />}/>
+          <Route path="/rec_form" element={<RecruiterForm />} />
         </Routes>
       </BrowserRouter>
     </>
