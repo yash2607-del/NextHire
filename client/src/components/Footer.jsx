@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-import React from 'react';
 
 export default function Footer() {
   return (
@@ -271,7 +269,7 @@ export default function Footer() {
         </div>
 
         <div className="text-muted text-center border-top py-8">
-          © 2021 - Present AGENCY. All rights reserved.
+          © 2025 - NextHire. All rights reserved.
         </div>
       </footer>
     </div>

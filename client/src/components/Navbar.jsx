@@ -1,14 +1,15 @@
  
-import React from 'react'
 
 function navbar() {
   return (
     <>
      <nav className="navbar navbar-expand-lg bg-light py-2">
     <div className="container-fluid">
+    <link rel="icon" href="/assets/hiring.png" type="image/png" sizes="192x192" />
+
       <a className="navbar-brand fs-3 logo-name" href="#">
         {" "}
-        Recruitees
+        NextHire
       </a>
       <button
         className="navbar-toggler"
