@@ -5,12 +5,10 @@ function navbar() {
     <>
      <nav className="navbar navbar-expand-lg bg-light py-2">
     <div className="container-fluid">
-    <link rel="icon" href="/assets/hiring.png" type="image/png" sizes="192x192" />
-
-      <a className="navbar-brand fs-3 logo-name" href="#">
-        {" "}
-        NextHire
-      </a>
+    <a className="navbar-brand fs-3 logo-name" href="#">
+            <img src="/assets/hire_1.png" alt="NextHire Logo" style={{ width: "30px", height: "30px", marginRight: "10px" }} />
+            NextHire
+          </a>
       <button
         className="navbar-toggler"
         type="button"

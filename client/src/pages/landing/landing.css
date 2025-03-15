@@ -1,70 +1,89 @@
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure the container-fluid class does not cause overflow */
+.container-fluid {
+  max-width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Ensure the navbar does not cause overflow */
+.navbar {
+  max-width: 100%;
+}
+
+/* Ensure the hero section does not cause overflow */
+.hero-section {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Ensure the hero image does not cause overflow */
+.hero-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure the cards do not cause overflow */
+.card {
+  flex: 1 1 300px; /* Ensures cards take up equal space */
+  max-width: 350px; /* Prevents overly wide cards */
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%; /* Cards take full width on smaller screens */
+  }
+}
+
+/* Other existing styles */
 .started {
-    margin-right: 15px;
+  margin-right: 15px;
 }
 
-.navbar-nav{
-    gap: 50 px;
+.navbar-nav {
+  gap: 50px;
 }
 
-.hero-section{
-    background-color: rgb(71, 71, 216);
+.nav-font {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: rgb(240, 209, 171);
 }
 
-.hero-img{
-    margin-top: 8vh;
+.logo-name {
+  font-weight: bold;
 }
 
-.nav-font{
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    color: rgb(240, 209, 171);
+.left-section {
+  margin-top: 18vh;
+  margin-left: 16vh;
 }
 
-.logo-name{
-        font-weight:bold;
-
+.heading {
+  font-size: 44px;
+  color: rgb(86, 86, 234);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
 }
 
-
-
-
-.left-section{
-    margin-top: 18vh;
-    margin-left: 16vh;
+.feature-heading {
+  margin-top: 140px;
+  margin-bottom: 0px;
 }
-
-.heading{
-    font-size:44px;
-    color: rgb(86, 86, 234);
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-}
-
-.feature-heading{
-    margin-top:140px;
-    margin-bottom: 0px;
-}
-
 
 .d-flex {
-    gap: 1.5rem; /* Reduces unnecessary spacing */
-  }
-  
-  .card {
-    flex: 1 1 300px; /* Ensures cards take up equal space */
-    max-width: 350px; /* Prevents overly wide cards */
-    text-align: center;
-  }
-  
-  @media (max-width: 768px) {
-    .card {
-      flex: 1 1 100%; /* Cards take full width on smaller screens */
-    }
-  }
+  gap: 1.5rem; /* Reduces unnecessary spacing */
+}
 
-  .query-heading{
-    margin-top: 190px;
-  }
-  
+.query-heading {
+  margin-top: 190px;
+}

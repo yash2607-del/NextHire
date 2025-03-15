@@ -8,7 +8,7 @@ import Login from "./pages/auth/login/Login";
 import Signup from "./pages/auth/signup/Signup";
 import Landing from "./pages/landing/Landing";
 import RecruiterForm from "./pages/rec_form/RecruiterForm";
-import Home from "./pages/home/Home";
+import Home from "./pages/home/Home"
 
 function App() {
   return (
