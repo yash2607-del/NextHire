@@ -1,6 +1,5 @@
- 
 
-function navbar() {
+function Navbar() {
   return (
     <>
      <nav className="navbar navbar-expand-lg bg-light py-2">
@@ -55,4 +54,4 @@ function navbar() {
   )
 }
 
-export default navbar
+export default Navbar;

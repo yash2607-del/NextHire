@@ -9,7 +9,7 @@ import Signup from "./pages/auth/signup/Signup";
 import Landing from "./pages/landing/Landing";
 import RecruiterForm from "./pages/recruiter/rec_form/RecruiterForm";
 import Home from "./pages/home/Home";
-import rec_landing from "./pages/recruiter/recruiter_landing/rec_landing";
+import RecLanding from "./pages/recruiter/recruiter_landing/RecLanding";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route path="/landing" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/rec_form" element={<RecruiterForm />} />
-          <Route path="/recruiter_landing" element={<rec_landing />} />
+          <Route path="/recruiter_landing" element={<RecLanding />} />
         </Routes>
       </BrowserRouter>
     </>
