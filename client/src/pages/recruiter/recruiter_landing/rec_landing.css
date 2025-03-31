@@ -1,0 +1,48 @@
+.landing-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: #fff;
+  }
+  
+  .text-section {
+    max-width: 500px;
+  }
+  
+  .text-section h1 {
+    font-size: 2.5rem;
+    color: #222;
+  }
+  
+  .text-section h1 span {
+    font-style: italic;
+    color: #444;
+  }
+  
+  .cta-button {
+    background-color: #175ddc;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .cta-button:hover {
+    background-color: #144bb5;
+  }
+  
+  .terms-link {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .image-section img {
+    max-width: 400px;
+    height: auto;
+  }
+  

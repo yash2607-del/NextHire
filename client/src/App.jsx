@@ -7,8 +7,9 @@ import Newpass from "./pages/auth/newpass/Newpass";
 import Login from "./pages/auth/login/Login";
 import Signup from "./pages/auth/signup/Signup";
 import Landing from "./pages/landing/Landing";
-import RecruiterForm from "./pages/rec_form/RecruiterForm";
-import Home from "./pages/home/Home"
+import RecruiterForm from "./pages/recruiter/rec_form/RecruiterForm";
+import Home from "./pages/home/Home";
+import rec_landing from "./pages/recruiter/recruiter_landing/rec_landing";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/landing" element={<Landing />} />
           <Route path="/home" element={<Home />} />
           <Route path="/rec_form" element={<RecruiterForm />} />
+          <Route path="/recruiter_landing" element={<rec_landing />} />
         </Routes>
       </BrowserRouter>
     </>
