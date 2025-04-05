@@ -50,7 +50,7 @@ function RecLanding(){
 
       <div className="card bg-white shadow-sm flex-grow-1" style={{ maxWidth: "20rem" }}>
         <div className="card-body d-flex flex-column">
-        <span className="fs-3">✅</span>
+        <span className="fs-3">✍</span>
           <h2 className="card-title h3 fw-semibold text-primary mt-4">
           Fill the form to build a job post.
           </h2>
@@ -59,7 +59,39 @@ function RecLanding(){
           </p>
         </div>
       </div>
+
+      <div className="card bg-white shadow-sm flex-grow-1" style={{ maxWidth: "20rem" }}>
+        <div className="card-body d-flex flex-column">
+        <span className="fs-3">📶</span>
+          <h2 className="card-title h3 fw-semibold text-primary mt-4">
+          Post your job.
+          </h2>
+          <p className="card-text text-secondary fs-5 mb-4 mt-4">
+          After you post your job, use our state-of-the-art tools to help you find dream talent.
+          </p>
+        </div>
+      </div>
+      <div className="card bg-white shadow-sm flex-grow-1" style={{ maxWidth: "20rem" }}>
+        <div className="card-body d-flex flex-column">
+        <span className="fs-3">☑️</span>
+          <h2 className="card-title h3 fw-semibold text-primary mt-4">
+          Review and find your perfect candidate.
+          </h2>
+          <p className="card-text text-secondary fs-5 mb-4 mt-4">
+          Our tools help to review the resume and find the match for you to review. 
+          </p>
+        </div>
+      </div>
+
     </div>
+    </div>
+    <div className="container-fluid d-flex flex-column align-items-center text-center py-5">
+      <div className="landing-container">
+        <div className="text-section">
+          <h1>GET STARTED IN MINUTES✓</h1>
+          <b className="cta-button">Post a job</b>
+        </div>
+      </div> 
     </div>
 
 

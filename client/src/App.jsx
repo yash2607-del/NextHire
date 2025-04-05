@@ -10,7 +10,6 @@ import Landing from "./pages/landing/Landing";
 import RecruiterForm from "./pages/recruiter/rec_form/RecruiterForm";
 import Home from "./pages/home/Home";
 import RecLanding from "./pages/recruiter/recruiter_landing/RecLanding";
-
 function App() {
   return (
     <>
