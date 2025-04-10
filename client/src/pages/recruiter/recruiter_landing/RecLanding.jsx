@@ -12,7 +12,9 @@ function RecLanding(){
         <div className="text-section">
           <h1>Hire your next great employee. <span>Fast.</span></h1>
           <h5>A hiring solution from job posting to post-placement support</h5>
+          <a href="/RecruiterForm">
           <button className="cta-button">Post a job</button>
+          </a>
         </div>
         <div className="image-section">
           <img src="/assets/recruiter.png" alt="Recruiter" />
@@ -89,7 +91,9 @@ function RecLanding(){
       <div className="landing-container">
         <div className="text-section">
           <h1>GET STARTED IN MINUTES✓</h1>
+          <a href="/RecruiterForm">
           <b className="cta-button">Post a job</b>
+          </a>
         </div>
       </div> 
     </div>

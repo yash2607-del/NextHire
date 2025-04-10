@@ -23,7 +23,7 @@ function Navbar() {
         <div className="d-flex me-auto"></div>
         <ul className="navbar-nav me-auto d-flex gap-5 mb-2 mb-lg-0 ">
           <li className="nav-item fs-5 nav-font ">
-            <a className="nav-link " href="#">
+            <a className="nav-link " href="Home">
               {" "}
               Home
             </a>
