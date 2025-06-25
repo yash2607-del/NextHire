@@ -44,8 +44,10 @@ function RecForm3(){
         }
     };
     const [otherAssistiveTools, setOtherAssistiveTools] = useState("");
+    const navigate = useNavigate();
+    
     const handleContinue = () => {
-        navigate("/RecForm3");
+        navigate("/RecForm4");
     };
 
 
