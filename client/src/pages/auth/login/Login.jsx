@@ -1,13 +1,45 @@
-import React from 'react';
-import Signup from '../signup/Signup.jsx';
+import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:8000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        toast.success("Login successful!");
+
+        setTimeout(() => {
+          window.location.href = "/home";
+        }, 1500);
+      } else {
+        toast.error(data.error || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("An error occurred. Please try again.");
+    }
+  };
+
   return (
     <>
+      <ToastContainer />
       <section className="wrapper">
         <div className="container">
           <div className="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
-            <form className="rounded bg-white shadow p-5">
+            <form className="rounded bg-white shadow p-5" onSubmit={handleSubmit}>
               <h1 className="text-dark fw-bolder fs-4 mb-2">Login Form</h1>
 
               <div className="form-floating mb-3">
@@ -16,6 +48,9 @@ function Login() {
                   className="form-control"
                   id="floating-input"
                   placeholder="xyz@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
                 <label htmlFor="floatingInput">Email Address</label>
               </div>
@@ -26,6 +61,9 @@ function Login() {
                   className="form-control"
                   id="floatingPassword"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <label htmlFor="floatingPassword">Password</label>
               </div>

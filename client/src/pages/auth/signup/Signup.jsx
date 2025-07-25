@@ -1,19 +1,82 @@
 import React, { useState } from "react";
-import './signup.css';
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./signup.css";
 
 function Signup() {
   const [role, setRole] = useState("Applicant");
+
+  // Common
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  // Applicant
+  const [fullName, setFullName] = useState("");
+  const [location, setLocation] = useState("");
+  const [experience, setExperience] = useState("");
+  const [jobType, setJobType] = useState("");
+
+  // Recruiter
+  const [companyName, setCompanyName] = useState("");
+  const [companyLocation, setCompanyLocation] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [industryType, setIndustryType] = useState("");
 
   const toggleRole = (selectedRole) => {
     setRole(selectedRole);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    let payload = {
+      name: role === "Applicant" ? fullName : email.split("@")[0],
+      email,
+      password,
+      role,
+      additionalData: {},
+    };
+
+    if (role === "Applicant") {
+      payload.additionalData = {
+        location,
+        experience,
+        jobType,
+      };
+    } else {
+      payload.additionalData = {
+        company: companyName,
+        location: companyLocation,
+        jobTitle,
+        industry: industryType,
+      };
+    }
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/user", payload);
+      toast.success(response.data.message);
+      setTimeout(()=>{
+        window.location.href='/login';
+      },1500)
+    } catch (error) {
+      toast.error(error.response?.data?.error || "Signup failed");
+    }
+  };
+
   return (
     <>
+      <ToastContainer />
       <section className="wrapper">
         <div className="container">
           <div className="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
-            <form className="rounded bg-white shadow p-5">
+            <form className="rounded bg-white shadow p-5" onSubmit={handleSubmit}>
               <h6 className="text-dark fw-bolder fs-4 mb-2">Sign In as</h6>
 
               <div className="btn-group w-100 mb-5" role="group">
@@ -33,189 +96,161 @@ function Signup() {
                 </button>
               </div>
 
-              {/* Common Fields */}
+              {/* Email and Password */}
               <div className="form-floating mb-3">
                 <input
                   type="email"
                   className="form-control"
-                  id="floating-input"
                   placeholder="xyz@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
-                <label htmlFor="floatingInput">Email Address </label>
+                <label>Email Address</label>
               </div>
 
               <div className="form-floating mb-3">
                 <input
                   type="password"
                   className="form-control"
-                  id="floatingPassword"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-                <label htmlFor="floatingPassword">Password</label>
+                <label>Password</label>
               </div>
 
               <div className="form-floating mb-3">
                 <input
                   type="password"
                   className="form-control"
-                  id="floatingConfirmPassword"
                   placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
                 />
-                <label htmlFor="floatingConfirmPassword">
-                  Confirm Password
-                </label>
+                <label>Confirm Password</label>
               </div>
 
-              {/* Conditional Fields */}
+              {/* Recruiter Fields */}
               {role === "Recruiter" && (
                 <>
                   <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingCompany"
-                      placeholder="Enter your company name"
+                      placeholder="Company Name"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
                     />
-                    <label htmlFor="floatingCompany">Company Name</label>
+                    <label>Company Name</label>
                   </div>
                   <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingLocation"
-                      placeholder="Enter company location"
+                      placeholder="Company Location"
+                      value={companyLocation}
+                      onChange={(e) => setCompanyLocation(e.target.value)}
                     />
-                    <label htmlFor="floatingLocation">Company Location</label>
+                    <label>Company Location</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <select className="form-select" id="floatingJobTitle">
-                      <option selected disabled>
-                        Select Job Title
-                      </option>
-                      <option value="manager">Manager</option>
-                      <option value="developer">Developer</option>
-                      <option value="designer">Designer</option>
-                      <option value="analyst">Analyst</option>
+                    <select
+                      className="form-select"
+                      value={jobTitle}
+                      onChange={(e) => setJobTitle(e.target.value)}
+                    >
+                      <option disabled value="">Select Job Title</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Developer">Developer</option>
+                      <option value="Designer">Designer</option>
+                      <option value="Analyst">Analyst</option>
                     </select>
-                    <label htmlFor="floatingJobTitle">Job Title</label>
+                    <label>Job Title</label>
                   </div>
                   <div className="form-floating mb-3">
-                    <select className="form-select" id="floatingIndustryType">
-                      <option selected disabled>
-                        Select Industry Type
-                      </option>
-                      <option value="it">IT</option>
-                      <option value="finance">Finance</option>
-                      <option value="healthcare">Healthcare</option>
-                      <option value="education">Education</option>
+                    <select
+                      className="form-select"
+                      value={industryType}
+                      onChange={(e) => setIndustryType(e.target.value)}
+                    >
+                      <option disabled value="">Select Industry Type</option>
+                      <option value="Software">IT</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Healthcare">Healthcare</option>
+                      <option value="Education">Education</option>
                     </select>
-                    <label htmlFor="floatingIndustryType">Industry Type</label>
+                    <label>Industry Type</label>
                   </div>
-
-                  <div className="btn-group w-25  mb-6">
-
-<button className="btn btn-primary mb-3">Sign Up</button>
-</div>
-
-<br />
-
-                  <div className="text-center text-muted text-uppercase mb-2">{" "} or </div>
-                  <div className="linkedin-button">
-                    <button type="submit" className="linkedin-btn">
-                      <img src="/assets/linkedin-icon.svg" className="linkedin-icon" alt="LinkedIn Icon" />
-                      <span className="linkedin-text">Sign in with LinkedIn</span>
-                    </button>
-                    
-                  </div>
-
-                  <br />
-
-                  <p className="mt-2 text-center text-sm text-gray-600 mb-5">
-                Already have an account?
-                <a className="sign-in" href="#"> Login</a>
-              </p>
-
-                  
-                 
                 </>
               )}
 
+              {/* Applicant Fields */}
               {role === "Applicant" && (
                 <>
                   <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingFullName"
-                      placeholder="Enter your full name"
+                      placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                     />
-                    <label htmlFor="floatingFullName">Full Name</label>
+                    <label>Full Name</label>
                   </div>
                   <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingLocation"
-                      placeholder="Enter your location"
+                      placeholder="Location"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
                     />
-                    <label htmlFor="floatingLocation">Location</label>
+                    <label>Location</label>
                   </div>
 
                   <h6 className="text-dark mb-1">Experience Level</h6>
                   <div className="btn-group w-100 mb-3" role="group">
-                    <button type="button" className="btn btn-outline-primary">
-                      Fresher
-                    </button>
-                    <button type="button" className="btn btn-outline-primary">
-                      1-3 years
-                    </button>
-                    <button type="button" className="btn btn-outline-primary">
-                      3+ years
-                    </button>
+                    {["Fresher", "1-3 years", "3+ years"].map((level) => (
+                      <button
+                        type="button"
+                        key={level}
+                        className={`btn ${experience === level ? "btn-primary" : "btn-outline-primary"}`}
+                        onClick={() => setExperience(level)}
+                      >
+                        {level}
+                      </button>
+                    ))}
                   </div>
 
                   <div className="form-floating mb-3">
-                    <select className="form-select" id="floatingJobType">
-                      <option selected disabled>
-                        Select Job Type
-                      </option>
-                      <option value="remote">Remote</option>
-                      <option value="hybrid">Hybrid</option>
-                      <option value="onsite">On-Site</option>
-                      <option value="any">Any</option>
+                    <select
+                      className="form-select"
+                      value={jobType}
+                      onChange={(e) => setJobType(e.target.value)}
+                    >
+                      <option disabled value="">Select Job Type</option>
+                      <option value="Remote">Remote</option>
+                      <option value="Hybrid">Hybrid</option>
+                      <option value="On-Site">On-Site</option>
+                      <option value="Any">Any</option>
                     </select>
-                    <label htmlFor="floatingJobType">Which Job Type you prefer?</label>
+                    <label>Preferred Job Type</label>
                   </div>
-
-                  <div className="btn-group w-25  mb-6">
-
-<button className="btn btn-primary mb-3">Sign Up</button>
-</div>
-
-<br />
-
-                  <div className="text-center text-muted text-uppercase mb-2">
-                {" "}
-                or
-              </div>
-
-              <div className="google-button">
-                <button type="submit" className="google-btn">
-                  <img src="/assets/google-icon.svg" className="google-icon" alt="Google Icon" />
-                  <span className="google-text">Sign in with Google</span>
-                </button>
-              </div>
-              <br />
-
-          
-              <p className="mt-2 text-center text-sm text-gray-600 mb-5">
-                Already have an account?
-                <a className="sign-in" href="/login"> Login</a>
-              </p>
                 </>
               )}
 
-             
+              {/* Submit */}
+              <div className="btn-group w-100 mb-4">
+                <button type="submit" className="btn btn-primary w-100">Sign Up</button>
+              </div>
+
+              <p className="mt-2 text-center text-sm text-gray-600">
+                Already have an account?{" "}
+                <a className="sign-in" href="/login">Login</a>
+              </p>
             </form>
           </div>
         </div>
