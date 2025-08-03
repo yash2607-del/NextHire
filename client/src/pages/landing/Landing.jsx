@@ -3,8 +3,9 @@ import Card from "../../components/Card";
 import Footer from "../../components/Footer";
 
 function Landing() {
+  
   return (
-    <>
+    <>    
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg bg-light py-2">
         <div className="container-fluid">
@@ -82,8 +83,9 @@ function Landing() {
         <h5 className="ms-4">&quot;Connecting Talent with Opportunity&quot;</h5>
         <h5 className="ms-4">&quot;Your Dream Job, Just a Click Away!&quot;</h5>
         <div className="mx-4 py-4">
-          <button className="btn btn-primary rounded-3 mx-2 px-3">Hire</button>
-          <button className="btn btn-primary rounded-3 px-3">Apply</button>
+          <a href="/recruiter_landing" class="btn btn-primary rounded-3 mx-2 px-3">Hire</a>
+          <a href="/apply_landing" class="btn btn-primary rounded-3 px-3">Apply</a>
+
         </div>
       </div>
 

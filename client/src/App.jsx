@@ -13,6 +13,7 @@ import RecLanding from "./pages/recruiter/recruiter_landing/RecLanding";
 import RecForm2 from "./pages/recruiter/rec_form/RecForm2";
 import RecForm3 from "./pages/recruiter/rec_form/RecForm3";
 import RecForm4 from "./pages/recruiter/rec_form/RecForm4";
+import { RecruiterProvider } from "./context/RecruiterContext";
 
 function App() {
   return (
@@ -24,12 +25,12 @@ function App() {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/newpass" element={<Newpass />} />
           <Route path="/landing" element={<Landing />} />
+          <Route path="/RecLanding" element={<RecLanding />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/RecruiterForm" element={<RecruiterForm />} />
-          <Route path="/recruiter_landing" element={<RecLanding />} />
-          <Route path="RecForm2" element={<RecForm2 />} />
-          <Route path="RecForm3" element={<RecForm3 />} />
-          <Route path="RecForm4" element={<RecForm4 />} />
+          <Route path="/RecruiterForm" element={<RecruiterProvider><RecruiterForm /></RecruiterProvider>} />
+          <Route path="/RecForm2" element={<RecruiterProvider><RecForm2 /></RecruiterProvider>} />
+          <Route path="/RecForm3" element={<RecruiterProvider><RecForm3 /></RecruiterProvider>} />
+          <Route path="/RecForm4" element={<RecruiterProvider><RecForm4 /></RecruiterProvider>} />
         </Routes>
       </BrowserRouter>
     </>

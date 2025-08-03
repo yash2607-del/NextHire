@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
+import { useRecruiterForm } from "../../../context/RecruiterContext";
 
 function RecruiterForm() {
   const navigate = useNavigate();
+  const { formData, setFormData } = useRecruiterForm();
 
-  const [companyName, setCompanyName] = useState("");
-  const [companyWebsite, setCompanyWebsite] = useState("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const isFormValid = companyName.trim() !== "" && companyWebsite.trim() !== "";
+  const isFormValid = formData.companyName.trim() !== "" && formData.companyWebsite.trim() !== "";
 
   const handleContinue = () => {
     if (isFormValid) {
@@ -25,7 +29,7 @@ function RecruiterForm() {
       <div className="container-fluid d-flex flex-column align-items-center text-center py-5">
         <div className="landing-container">
           <div className="text-section">
-            <h2>Hiring made easier. Fill a short form to post a job. </h2>
+            <h2>Hiring made easier. Fill a short form to post a job.</h2>
           </div>
           <div className="image-section">
             <img src="/assets/building.jpg" alt="Form" />
@@ -43,11 +47,12 @@ function RecruiterForm() {
             </label>
             <input
               type="text"
+              name="companyName"
               className="form-control"
               id="CompanyName"
               placeholder="Enter your company name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
+              value={formData.companyName}
+              onChange={handleChange}
               required
             />
           </div>
@@ -58,11 +63,12 @@ function RecruiterForm() {
             </label>
             <input
               type="url"
+              name="companyWebsite"
               className="form-control"
               id="website"
               placeholder="https://example.com"
-              value={companyWebsite}
-              onChange={(e) => setCompanyWebsite(e.target.value)}
+              value={formData.companyWebsite}
+              onChange={handleChange}
               required
             />
           </div>
@@ -72,9 +78,12 @@ function RecruiterForm() {
               Company Description (Optional)
             </label>
             <textarea
+              name="companyDescription"
               className="form-control"
               id="companyDescription"
               rows="4"
+              value={formData.companyDescription}
+              onChange={handleChange}
               placeholder="Enter a brief description of the company"
             ></textarea>
           </div>
