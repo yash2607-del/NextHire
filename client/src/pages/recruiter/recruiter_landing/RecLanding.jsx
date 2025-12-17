@@ -10,16 +10,29 @@ function RecLanding(){
     <div className="container-fluid d-flex flex-column align-items-center text-center py-5">
       <div className="landing-container">
         <div className="text-section">
-          <h1>Hire your next great employee. <span>Fast.</span></h1>
-          <h5>A hiring solution from job posting to post-placement support</h5>
-          <a href="/RecruiterForm">
-          <button className="cta-button">Post a job</button>
-          </a>
+          <h1>Recruiter Portal</h1>
+          <h5 className="mb-4">Manage your jobs, view applicants, and find your next hire.</h5>
+          <div className="d-flex flex-wrap justify-content-center gap-3 mb-3">
+            <a href="/RecruiterForm">
+              <button className="cta-button">Post a Job</button>
+            </a>
+            <a href="/review">
+              <button className="btn btn-outline-primary">My Jobs</button>
+            </a>
+          </div>
         </div>
         <div className="image-section">
           <img src="/assets/recruiter.png" alt="Recruiter" />
         </div>
-      </div> 
+      </div>
+      <div className="mt-4 w-100">
+        <div className="row justify-content-center">
+          <div className="col-lg-8 text-center">
+            <h2 className="fw-bold fs-1 mb-3">All your hiring tools in one place</h2>
+            <p className="fs-5 text-secondary">Post jobs, track applications, and review candidates with ease. Use the dashboard to manage your postings and see real-time stats on your hiring process.</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div className="bg-warning-subtle w-100 py-3">
       <div className="container">

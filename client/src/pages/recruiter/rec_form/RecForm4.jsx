@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import Navbar from "../../../components/Navbar";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecruiterForm } from "../../../context/RecruiterContext";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function RecForm4() {
   const navigate = useNavigate();
@@ -14,119 +11,110 @@ function RecForm4() {
   const [contactNumber, setContactNumber] = useState(formData.contactNumber || "");
   const [additionalInfo, setAdditionalInfo] = useState(formData.additionalInfo || "");
 
+  useEffect(() => {
+    setDeadline(formData.deadline || "");
+    setContactNumber(formData.contactNumber || "");
+    setAdditionalInfo(formData.additionalInfo || "");
+  }, [formData]);
+
   const handleSubmit = async () => {
-    // Basic validation
-    if (!deadline) {
-      toast.error("Please select an application deadline.");
-      return;
-    }
-    if (!contactNumber || !/^\d{10}$/.test(contactNumber)) {
-      toast.error("Please enter a valid 10-digit contact number.");
+    // Get JWT token from localStorage (or your auth context)
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in as a recruiter to post a job.");
+      navigate("/login");
       return;
     }
 
-    // Merge current data into context
-    const updatedData = {
-      ...formData,
+    // Debug: Decode token to show role
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log('Debug: Token payload:', payload);
+      alert(`Debug: Token role: ${payload.role}, userId: ${payload.userId}`);
+    } catch (e) {
+      console.error('Debug: Failed to decode token:', e);
+    }
+
+    const payload = {
+      // recruiterId is NOT sent; server uses token
+      title: formData.JobTitle,
+      category: formData.jobCategory,
+      jobType: formData.jobType,
+      location: formData.jobLocation,
+      jobDescription: formData.jobDescription,
       deadline,
       contactNumber,
-      additionalInfo
+      additionalInfo,
+      skills: formData.skills || [],
+      inclusivity: formData.selectedDisabilities || [],
+      accommodations: formData.accessibilities || [],
+      salary: formData.salaryRange ? Number(formData.salaryRange.replace(/[^0-9]/g, "")) : undefined,
     };
-    setFormData(updatedData);
+
+    // Frontend validation
+    const missing = [];
+    ["title","category","location","jobDescription","deadline","contactNumber"].forEach(key => {
+      if (!payload[key]) missing.push(key);
+    });
+    if (missing.length) {
+      alert("Missing required: " + missing.join(", "));
+      return;
+    }
 
     try {
-      // Post to backend
-      const response = await axios.post("http://localhost:8000/api/Recruiter_Form",
-        updatedData
-      );
-
-      toast.success(response.data.message || "Form submitted successfully!");
-      setTimeout(() => {
-        navigate("/Review");
-      }, 1500);
-    } catch (error) {
-      console.error(error);
-      toast.error(error.response?.data?.error || "Unexpected Error occurred.");
+      const res = await axios.post("http://localhost:8000/api/jobs", payload, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert(res.data.message || "Job posted successfully!");
+      navigate("/Review");
+    } catch (err) {
+      const status = err.response?.status;
+      if (status === 401 || status === 403) {
+        alert("You are not authorized. Please login as a recruiter.");
+        navigate("/login");
+        return;
+      }
+      console.error("Submission error:", err.response?.data || err.message);
+      alert("Backend validation failed:\n" + JSON.stringify(err.response?.data?.errors || err.response?.data || err.message, null, 2));
     }
   };
 
   return (
-    <div>
-      <Navbar />
-      <ToastContainer />
-      <div className="container-fluid d-flex flex-column align-items-center text-center py-5">
-        <div className="landing-container">
-          <div className="text-section">
-            <h2>You are all set to post your hiring post.</h2>
-            <h4>Last few details.</h4>
-          </div>
-          <div className="image-section">
-            <img src="/assets/form4.jpg" className="w-50" alt="Form" />
-          </div>
+    <>
+      <h2 className="mb-4 text-center" style={{ color: '#0d47a1', fontWeight: 700 }}>Confirm & Submit Job Posting</h2>
+      <div className="mx-auto" style={{ maxWidth: 600 }}>
+        <p><b>Title:</b> {formData.JobTitle}</p>
+        <p><b>Category:</b> {formData.jobCategory}</p>
+        <p><b>Type:</b> {formData.jobType}</p>
+        <p><b>Location:</b> {formData.jobLocation}</p>
+        <p><b>City:</b> {formData.jobCity}</p>
+        <p><b>Description:</b> {formData.jobDescription}</p>
+        <p><b>Skills:</b> {(formData.skills || []).join(", ")}</p>
+        <p><b>Inclusivity:</b> {(formData.selectedDisabilities || []).join(", ")}</p>
+        <p><b>Accommodations:</b> {(formData.accessibilities || []).join(", ")}</p>
+
+        <div className="mb-3">
+          <label className="form-label">Deadline to Apply *</label>
+          <input type="date" className="form-control" value={deadline} onChange={e => setDeadline(e.target.value)} />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Contact Number (10 digits) *</label>
+          <input type="tel" className="form-control" value={contactNumber} onChange={e => setContactNumber(e.target.value)} placeholder="1234567890" />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Additional Info (Optional)</label>
+          <textarea className="form-control" value={additionalInfo} onChange={e => setAdditionalInfo(e.target.value)} rows={3}></textarea>
+        </div>
+
+        <div className="d-flex justify-content-end">
+          <button className="btn btn-primary" onClick={handleSubmit}>
+            Submit Job
+          </button>
         </div>
       </div>
-
-      <div className="container d-flex justify-content-center">
-        <div className="w-100" style={{ maxWidth: "600px" }}>
-          {/* Deadline */}
-          <div className="mb-3">
-            <label htmlFor="deadline" className="form-label fw-bold">
-              Deadline to Apply <span className="text-danger">*</span>
-            </label>
-            <input
-              type="date"
-              id="deadline"
-              className="form-control"
-              value={deadline}
-              onChange={(e) => setDeadline(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* Contact Number */}
-          <div className="mb-3">
-            <label htmlFor="contactNumber" className="form-label fw-bold">
-              Contact Number <span className="text-danger">*</span>
-            </label>
-            <input
-              type="tel"
-              id="contactNumber"
-              className="form-control"
-              placeholder="Enter your contact number"
-              value={contactNumber}
-              onChange={(e) => setContactNumber(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* Additional Info */}
-          <div className="mb-3">
-            <label htmlFor="additionalInfo" className="form-label fw-bold">
-              Additional Information
-            </label>
-            <textarea
-              id="additionalInfo"
-              className="form-control"
-              rows="4"
-              placeholder="Any other relevant details"
-              value={additionalInfo}
-              onChange={(e) => setAdditionalInfo(e.target.value)}
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="d-flex justify-content-end mb-5 mt-2">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

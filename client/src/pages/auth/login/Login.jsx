@@ -21,9 +21,24 @@ function Login() {
         localStorage.setItem("token", data.token);
         toast.success("Login successful!");
 
+        // decode JWT payload to decide where to land the user
+        const parseJwt = (token) => {
+          try {
+            const payload = token.split('.')[1];
+            const decoded = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+            return decoded;
+          } catch (err) {
+            return null;
+          }
+        };
+
+        const decoded = parseJwt(data.token);
+        const role = decoded?.role;
+        const target = role === 'recruiter' ? '/dashboard' : '/applicant/jobs';
+
         setTimeout(() => {
-          window.location.href = "/home";
-        }, 1500);
+          window.location.href = target;
+        }, 800);
       } else {
         toast.error(data.error || "Login failed");
       }

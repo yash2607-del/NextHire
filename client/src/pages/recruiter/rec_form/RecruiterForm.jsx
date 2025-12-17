@@ -12,7 +12,9 @@ function RecruiterForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isFormValid = formData.companyName.trim() !== "" && formData.companyWebsite.trim() !== "";
+  const isFormValid =
+    (formData.companyName?.trim() || "") !== "" &&
+    (formData.companyWebsite?.trim() || "") !== "";
 
   const handleContinue = () => {
     if (isFormValid) {
@@ -24,18 +26,8 @@ function RecruiterForm() {
 
   return (
     <div>
-      <Navbar />
-
-      <div className="container-fluid d-flex flex-column align-items-center text-center py-5">
-        <div className="landing-container">
-          <div className="text-section">
-            <h2>Hiring made easier. Fill a short form to post a job.</h2>
-          </div>
-          <div className="image-section">
-            <img src="/assets/building.jpg" alt="Form" />
-          </div>
-        </div>
-      </div>
+     
+    
 
       <div className="container d-flex justify-content-center">
         <div className="w-100" style={{ maxWidth: "600px" }}>
@@ -51,7 +43,7 @@ function RecruiterForm() {
               className="form-control"
               id="CompanyName"
               placeholder="Enter your company name"
-              value={formData.companyName}
+              value={formData.companyName || ""}
               onChange={handleChange}
               required
             />
@@ -67,7 +59,7 @@ function RecruiterForm() {
               className="form-control"
               id="website"
               placeholder="https://example.com"
-              value={formData.companyWebsite}
+              value={formData.companyWebsite || ""}
               onChange={handleChange}
               required
             />
@@ -82,7 +74,7 @@ function RecruiterForm() {
               className="form-control"
               id="companyDescription"
               rows="4"
-              value={formData.companyDescription}
+              value={formData.companyDescription || ""}
               onChange={handleChange}
               placeholder="Enter a brief description of the company"
             ></textarea>

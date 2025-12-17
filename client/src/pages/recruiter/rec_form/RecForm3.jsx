@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useRecruiterForm } from "../../../context/RecruiterContext";
 
@@ -7,7 +6,6 @@ function RecForm3() {
   const navigate = useNavigate();
   const { formData, setFormData } = useRecruiterForm();
 
-  // Pre-fill from context if available
   const [selectedDisabilities, setSelectedDisabilities] = useState(formData.selectedDisabilities || []);
   const [accessibilities, setAccessibilities] = useState(formData.accessibilities || []);
   const [otherAssistiveTools, setOtherAssistiveTools] = useState(formData.otherAssistiveTools || "");
@@ -45,39 +43,25 @@ function RecForm3() {
   };
 
   const handleContinue = () => {
-    // Optional validation
     if (selectedDisabilities.length === 0) {
       alert("Please select at least one disability option.");
       return;
     }
 
-    // Save all fields at once to context
     setFormData({
       ...formData,
       selectedDisabilities,
       accessibilities,
-      otherAssistiveTools
+      otherAssistiveTools: otherAssistiveTools.trim(),
     });
 
     navigate("/RecForm4");
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="container-fluid d-flex flex-column align-items-center text-center py-5">
-        <div className="landing-container">
-          <div className="text-section">
-            <h2>Accessibility and Disability Inclusion Details</h2>
-          </div>
-          <div className="image-section">
-            <img src="/assets/inclusion.jpg" alt="Form" />
-          </div>
-        </div>
-      </div>
-
-      <div className="container d-flex justify-content-center">
-        <div className="w-100" style={{ maxWidth: "600px" }}>
+    <>
+      <h2 className="mb-4" style={{ color: '#0d47a1', fontWeight: 700 }}>Accessibility and Disability Inclusion Details</h2>
+      <div className="w-100" style={{ maxWidth: "600px" }}>
           {/* Disabilities */}
           <div className="mb-3">
             <label className="form-label fw-bold">
@@ -149,13 +133,13 @@ function RecForm3() {
               type="button"
               className="btn btn-primary"
               onClick={handleContinue}
+              disabled={selectedDisabilities.length === 0}
             >
               Continue
             </button>
-          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

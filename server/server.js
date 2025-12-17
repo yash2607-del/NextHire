@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import authRoutes from "./routes/AuthRoutes.js";
 import recruitRoutes from "./routes/RecruitRoute.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 import { User } from "./models/User.js"; 
 
 dotenv.config();
@@ -32,6 +33,7 @@ mongoose.connect(MONGOURL)
 
 app.use("/api", authRoutes);
 app.use("/api",recruitRoutes);
+app.use("/api/applications", applicationRoutes);
 
 app.get("/api/profile", async (req, res) => {
   const authHeader = req.headers.authorization;

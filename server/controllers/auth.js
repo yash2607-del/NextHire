@@ -5,6 +5,7 @@ import { User, Applicant, Recruiter } from "../models/User.js";
 export const register = async (req, res) => {
   try {
     const { name, email, password, role, additionalData } = req.body;
+    const normalizedRole = (role || "applicant").toString().toLowerCase();
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -19,10 +20,10 @@ export const register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role,
+      role: normalizedRole,
     });
 
-    if (role === "Applicant") {
+    if (normalizedRole === "applicant") {
       const { location, experience, jobType } = additionalData || {};
       await Applicant.create({
         userId: user._id,
@@ -31,7 +32,7 @@ export const register = async (req, res) => {
         experience,
         jobType,
       });
-    } else if (role === "Recruiter") {
+    } else if (normalizedRole === "recruiter") {
       const { company, location, jobTitle, industry } = additionalData || {};
       await Recruiter.create({
         userId: user._id,
@@ -72,8 +73,10 @@ export const login = async (req, res) => {
       return res.status(500).json({ error: "Server config error" });
     }
 
+    // Always use lowercase role in token
+    const normalizedRole = (user.role || "applicant").toString().toLowerCase();
     const token = jwt.sign(
-      { userId: user._id, email: user.email, role: user.role },
+      { userId: user._id, email: user.email, role: normalizedRole },
       JWT_SECRET,
       { expiresIn: "7d" }
     );
@@ -83,7 +86,7 @@ export const login = async (req, res) => {
     res.json({
       message: "Login successful",
       token,
-      role: user.role,
+      role: normalizedRole,
       userId: user._id,
     });
   } catch (error) {

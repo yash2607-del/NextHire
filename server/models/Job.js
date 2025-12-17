@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const jobSchema = new Schema({
-  recruiterId: { type: Schema.Types.ObjectId, ref: "recruiter", required: true },
+  recruiterId: { type: Schema.Types.ObjectId, ref: "Recruiter", required: true },
   title: { type: String, required: true },
   category: { type: String, enum : ["Software Development",
         "Design",
@@ -51,13 +51,15 @@ const jobSchema = new Schema({
   // Inclusivity checkboxes
   inclusivity: [{ 
     type: String, 
-    enum: ["Visual impairment",
-        "Hearing impairment",
-        "Blindness",
-        "Muteness",
-        "Upper limbs impairments (hands,arms)",
-        "Lower limbs impairments (legs,feet)",
-        "Locomoter disability"]
+    enum: [
+      "Visual impairment",
+      "Hearing impairment",
+      "Blindness",
+      "Muteness",
+      "Upper limbs impairments (hands, arms)",
+      "Lower limbs impairments (legs, feet)",
+      "Locomotor disability"
+    ]
   }],
 
   // Accommodations checkboxes

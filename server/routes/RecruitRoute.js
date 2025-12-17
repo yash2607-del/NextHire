@@ -1,12 +1,11 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { createJob, getAllJobs, getJobById } from '../controllers/Recruiter.js';
+import { createJob, getAllJobs, getJobById, getMyJobs, getRecruiterJobsWithApplications, deleteJob } from '../controllers/Recruiter.js';
+import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// Validation rules
 const jobValidationRules = [
-  body('recruiterId').notEmpty().withMessage('Recruiter ID is required'),
   body('title').notEmpty().withMessage('Job title is required'),
   body('category').notEmpty().withMessage('Category is required'),
   body('jobType').notEmpty().withMessage('Job type is required'),
@@ -16,9 +15,11 @@ const jobValidationRules = [
   body('contactNumber').notEmpty().withMessage('Contact number is required')
 ];
 
-// Routes
-router.post('/Recruiter_Form', jobValidationRules, createJob);
-//router.get('/api/jobs', getAllJobs);
-//router.get('/api/jobs/:id', getJobById);
+router.post('/jobs', protect(['recruiter']), jobValidationRules, createJob);
+router.get('/jobs', getAllJobs);
+router.get('/jobs/my', protect(['recruiter']), getMyJobs);
+router.get('/jobs/recruiter', protect(['recruiter']), getRecruiterJobsWithApplications);
+router.delete('/jobs/:id', protect(['recruiter']), deleteJob);
+router.get('/jobs/:id', getJobById);
 
 export default router;

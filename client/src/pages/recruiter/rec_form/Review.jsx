@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from "react";
+import Navbar from "../../../components/Navbar";
+import axios from "axios";
+
+
+function Review() {
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Not logged in");
+        const res = await axios.get("http://localhost:8000/api/jobs/my", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (Array.isArray(res.data) && res.data.length > 0) {
+          setJobs(res.data);
+        } else {
+          setJobs([]);
+        }
+      } catch (err) {
+        setError(err.response?.data?.error || err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchJobs();
+  }, []);
+
+  return (
+    <div>
+      <Navbar />
+      <div className="container text-center py-5">
+        <h2>My Jobs</h2>
+        <p>All jobs you have posted are listed below.</p>
+        {loading && <p>Loading your jobs...</p>}
+        {error && <p className="text-danger">{error}</p>}
+        {(!loading && jobs.length === 0) && <p>You have not posted any jobs yet.</p>}
+        <div className="row justify-content-center">
+          {jobs.map((job) => (
+            <div className="card mt-4 mx-2" style={{ maxWidth: 400 }} key={job._id}>
+              <div className="card-body">
+                <h4 className="card-title">{job.title}</h4>
+                <p><b>Category:</b> {job.category}</p>
+                <p><b>Type:</b> {job.jobType}</p>
+                <p><b>Location:</b> {job.location}</p>
+                <p><b>Description:</b> {job.jobDescription}</p>
+                <p><b>Skills:</b> {(job.skills || []).join(", ")}</p>
+                <p><b>Inclusivity:</b> {(job.inclusivity || []).join(", ")}</p>
+                <p><b>Accommodations:</b> {(job.accommodations || []).join(", ")}</p>
+                <p><b>Deadline:</b> {job.deadline ? new Date(job.deadline).toLocaleDateString() : "-"}</p>
+                <p><b>Contact:</b> {job.contactNumber}</p>
+                <p><b>Posted:</b> {job.createdAt ? new Date(job.createdAt).toLocaleString() : "-"}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a href="/RecLanding" className="btn btn-primary mt-4">Go to Recruiter Dashboard</a>
+      </div>
+    </div>
+  );
+}
+
+export default Review;
