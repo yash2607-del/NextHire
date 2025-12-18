@@ -81,13 +81,18 @@ function RecForm2() {
     if (isFormValid) {
       navigate("/RecForm3");
     } else {
-      alert("Please fill in all required fields.");
+      // set an accessible status and focus the first missing field
+      const first = document.querySelector('#JobTitle, #jobCategory, #jobType, #jobLocation, #jobDescription');
+      if (first) first.focus();
+      const statusEl = document.getElementById('recform2-status');
+      if (statusEl) statusEl.textContent = 'Please fill in all required fields.';
     }
   };
 
   return (
     <>
       <h2 className="mb-4" style={{ color: '#0d47a1', fontWeight: 700 }}>Add Job Details</h2>
+      <div id="recform2-status" role="status" aria-live="polite" style={{minHeight:20}}></div>
       <div className="w-100" style={{ maxWidth: "600px" }}>
           <div className="mb-3">
             <label htmlFor="JobTitle" className="form-label fw-bold">

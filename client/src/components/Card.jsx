@@ -10,7 +10,7 @@ function Card({ icon, title, text, buttonText }) {
           <h2 className="card-title h3 fw-semibold text-primary mt-4">{title}</h2>
           <p className="card-text text-secondary fs-5 mb-4 mt-4">{text}</p>
         </div>
-        <button type="button" className="btn btn-primary w-100 mt-auto">{buttonText}</button>
+        <button type="button" className="btn btn-primary w-100 mt-auto" aria-label={`${buttonText} for ${title}`}>{buttonText}</button>
       </div>
     </div>
   );

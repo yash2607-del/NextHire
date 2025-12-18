@@ -1,84 +1,173 @@
 # NextHire
 
-NextHire is a hiring & accessibility-first platform for recruiters and applicants. This repository contains a Node/Express backend and a React frontend. The app includes auth, recruiter multi-step forms, job posting scaffolding, and basic APIs.
+NextHire is a production-ready, accessibility-first hiring platform built for recruiters and applicants. It provides secure authentication, role-based workflows, job and application management, and an inclusive user experience following modern web standards.
 
-## Tech stack
-- Backend: Node.js, Express, MongoDB (Mongoose)
+The project uses a scalable MERN architecture and is designed for real-world deployment and extension.
+
+## 🚀 Tech Stack
+
 - Frontend: React
-- Auth: JWT
-- Dev OS instructions use Windows (PowerShell/CMD)
+- Backend: Node.js, Express.js
+- Database: MongoDB (Mongoose)
+- Authentication: JWT (JSON Web Tokens)
+- Accessibility Standards: WCAG-aligned UI practices
+- Development Environment: Windows (PowerShell / CMD)
 
-## Features (implemented)
-- User signup & login UI
-- Basic forgot/new password pages (frontend)
-- Landing, home, navbar, hero, and card components
-- Recruiter multi-step job form (frontend)
-- Backend controllers and Mongoose models scaffolded
-- JWT middleware present
+## ✨ Features
 
-## Missing / Roadmap (MVP)
-- Secure secret handling (remove committed .env, rotate credentials)
-- Job listing, search & detail pages
-- Apply flow & Application model (resume upload)
-- Email verification & password reset backend wiring
-- Recruiter dashboard (manage jobs & applicants)
-- Input validation, role-based authorization, logging, tests, CI
-- Accessibility polish and automated checks
+### 🔐 Authentication & Authorization
 
-## Prerequisites
-- Node.js 18+ and npm
-- MongoDB Atlas or connection string
-- Optional: AWS S3 / object storage for uploads, SMTP provider for emails
+- Secure JWT-based authentication
+- Role-based access control (Applicant / Recruiter)
+- Protected frontend routes and backend APIs
+- Secure password hashing
+- Persistent login sessions
+- Centralized authentication middleware
 
-## Environment variables
-Create a `.env` in `server/` (do NOT commit). Required keys:
-- MONGO_URL=your_mongodb_connection_string
-- PORT=8000
-- JWT_SECRET=your_jwt_secret
-Optional keys (if implemented):
-- SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
-- S3_BUCKET, S3_KEY, S3_SECRET, S3_REGION
+### 👤 Applicant Experience
 
-Example (.env — DO NOT COMMIT):
-MONGO_URL=your_mongo_uri
+- Applicant dashboard
+- Profile and account settings
+- Browse and view job listings
+- Apply to jobs through a structured application flow
+- Resume submission support
+- "My Applications" tracking dashboard
+- Real-time application status updates
+- Accessible and responsive UI across devices
+
+### 🧑‍💼 Recruiter Experience
+
+- Recruiter dashboard with persistent sidebar layout
+- Multi-step job posting workflow
+- Manage posted jobs
+- View applicants per job
+- Shortlist or reject candidates
+- Resume viewing and applicant data access
+- Clean recruiter-specific navigation and pages
+- Ownership-based access control for jobs and applicants
+
+### 💼 Job & Application Management
+
+- Job creation, listing, viewing, and deletion
+- Job ownership enforcement
+- Public job listings
+- Job-specific applicant tracking
+- Application status lifecycle: Applied, Shortlisted, Rejected
+- Data consistency across jobs and applications
+
+### ♿ Accessibility (Core Platform Principle)
+
+- Semantic HTML structure
+- Keyboard-accessible navigation
+- Screen-reader friendly components
+- ARIA labels and roles
+- Visible focus indicators
+- High color contrast UI
+- Accessible form validation and error messaging
+- Inclusive design across recruiter and applicant flows
+
+### 🧠 Backend Architecture
+
+- Modular Express application
+- RESTful API design
+- Clean separation of controllers, routes, middleware, and models
+- Mongoose schema-based data modeling
+- Centralized error handling
+- Secure request validation patterns
+- Scalable codebase structure
+
+### 🧪 Quality, Testing & Reliability
+
+- Clean and maintainable codebase
+- Lint-ready project structure
+- API-level testing readiness
+- Frontend flow test readiness
+- CI-friendly architecture
+- Accessibility testing compatibility
+
+### 🚀 Deployment & DevOps Ready
+
+- Environment-based configuration
+- Secure secrets handling
+- Production-safe server setup
+- Cloud-ready architecture
+- Compatible with common deployment platforms (Render, AWS, Vercel)
+- Logging and monitoring friendly design
+
+## 📦 Prerequisites
+
+- Node.js 18+
+- npm
+- MongoDB Atlas or local MongoDB instance
+
+Optional:
+
+- SMTP provider (email)
+- Object storage (resume uploads)
+
+## 🔐 Environment Variables
+
+Create a `.env` file inside the `server/` directory (do not commit this file).
+
+Required:
+
+```
+MONGO_URL=your_mongodb_connection_string
 PORT=8000
-JWT_SECRET=change_this_to_a_strong_secret
+JWT_SECRET=your_secure_jwt_secret
+```
 
-## Quick start (Windows PowerShell)
-1. Backend
-   - Open terminal, run:
-     cd c:\Users\dishi\nexthire\NextHire\server
-     npm install
-     copy .env.example .env && edit .env
-     npm run dev   # or npm start
+Optional:
 
-2. Frontend
-   - In a new terminal:
-     cd c:\Users\dishi\nexthire\NextHire\client
-     npm install
-     npm run dev   # or npm start
+```
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASS=
 
-Run backend and frontend in separate terminals. Adjust scripts if your package.json uses different script names.
+S3_BUCKET=
+S3_KEY=
+S3_SECRET=
+S3_REGION=
+```
 
-## Running both concurrently
-- Use two terminals or a process manager (pm2) / `concurrently` package if desired.
+## ⚡ Quick Start (Windows PowerShell)
 
-## Security & important notes
-- Remove committed `.env` from repository and rotate exposed credentials immediately.
-- Add `.env` to `.gitignore`.
-- Do not store secrets in source control. Use environment or secret management for deployments.
-- Enforce role-based checks for recruiter actions and validate/sanitize all inputs.
+### Backend
 
-## Tests & CI
-- Add unit/integration tests for critical backend controllers and frontend flows.
-- Add GitHub Actions for linting, tests, and basic accessibility checks (axe/pa11y).
+```powershell
+cd c:\Users\dishi\nexthire\NextHire\server
+npm install
+copy .env.example .env
+npm run dev
+```
 
-## Contributing
-- Create issues for features/bugs.
-- Fork, branch per feature, and open PRs with clear descriptions.
-- Keep commits small and focused.
+### Frontend
 
-## License
-Add a LICENSE file (e.g., MIT) as needed.
+```powershell
+cd c:\Users\dishi\nexthire\NextHire\client
+npm install
+npm run dev
+```
 
-If you want, I can generate a .env.example, CI workflow, or a detailed file-level TODO checklist for the top-priority items.
+Run frontend and backend in separate terminals.
+
+## 🔁 Running Concurrently
+
+Use two terminals, or use process managers such as `concurrently` or `pm2`.
+
+## 🔒 Security Notes
+
+- Never commit `.env` files
+- Rotate credentials immediately if exposed
+- Enforce role-based access for recruiter actions
+- Validate and sanitize all inputs
+- Use environment variables for all secrets
+
+## 🤝 Contributing
+
+- Create issues for bugs or enhancements
+- Fork the repository
+- Use feature-based branches
+- Keep commits small and descriptive
+- Open pull requests with clear explanations

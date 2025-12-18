@@ -42,9 +42,14 @@ function RecForm3() {
     );
   };
 
+  const [status, setStatus] = useState("");
+
   const handleContinue = () => {
     if (selectedDisabilities.length === 0) {
-      alert("Please select at least one disability option.");
+      // announce missing selection and focus first checkbox
+      setStatus("Please select at least one disability option.");
+      const firstCheckbox = document.querySelector('input[id^="disability-"]');
+      if (firstCheckbox) firstCheckbox.focus();
       return;
     }
 
@@ -62,11 +67,10 @@ function RecForm3() {
     <>
       <h2 className="mb-4" style={{ color: '#0d47a1', fontWeight: 700 }}>Accessibility and Disability Inclusion Details</h2>
       <div className="w-100" style={{ maxWidth: "600px" }}>
+        <div id="recform3-status" role="status" aria-live="polite" style={{minHeight:20}}>{status && <span className="text-danger">{status}</span>}</div>
           {/* Disabilities */}
-          <div className="mb-3">
-            <label className="form-label fw-bold">
-              Job is inclusive for (select all that apply)
-            </label>
+          <fieldset className="mb-3" aria-required="true" aria-labelledby="disabilities-legend">
+            <legend id="disabilities-legend" className="form-label fw-bold">Job is inclusive for (select all that apply)</legend>
             <div className="row">
               {disabilities.map((disability, index) => (
                 <div className="col-md-6" key={index}>
@@ -85,13 +89,11 @@ function RecForm3() {
                 </div>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           {/* Accessibility options */}
-          <div className="mb-3">
-            <label className="form-label fw-bold">
-              Accommodations Provided (select all that apply)
-            </label>
+          <fieldset className="mb-3" aria-labelledby="accommodations-legend">
+            <legend id="accommodations-legend" className="form-label fw-bold">Accommodations Provided (select all that apply)</legend>
             <div className="row">
               {options.map((option, idx) => (
                 <div className="col-md-6" key={idx}>
@@ -110,13 +112,11 @@ function RecForm3() {
                 </div>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           {/* Other tools */}
           <div className="mb-3">
-            <label htmlFor="additionalTools" className="form-label fw-bold">
-              Other Assistive Tools (Optional)
-            </label>
+            <label htmlFor="additionalTools" className="form-label fw-bold">Other Assistive Tools (Optional)</label>
             <input
               type="text"
               className="form-control"
@@ -134,6 +134,8 @@ function RecForm3() {
               className="btn btn-primary"
               onClick={handleContinue}
               disabled={selectedDisabilities.length === 0}
+              aria-disabled={selectedDisabilities.length === 0}
+              aria-label="Continue to accessibility accommodations"
             >
               Continue
             </button>

@@ -35,15 +35,17 @@ function Review() {
   return (
     <div>
       <Navbar />
-      <div className="container text-center py-5">
-        <h2>My Jobs</h2>
+      <main className="container text-center py-5" role="main" aria-labelledby="myjobs-heading">
+        <h2 id="myjobs-heading">My Jobs</h2>
         <p>All jobs you have posted are listed below.</p>
-        {loading && <p>Loading your jobs...</p>}
-        {error && <p className="text-danger">{error}</p>}
+        <div role="status" aria-live="polite" style={{minHeight:20}}>
+          {loading && <p>Loading your jobs...</p>}
+          {error && <p className="text-danger">{error}</p>}
+        </div>
         {(!loading && jobs.length === 0) && <p>You have not posted any jobs yet.</p>}
-        <div className="row justify-content-center">
+        <div className="row justify-content-center" role="list" aria-label="Your posted jobs">
           {jobs.map((job) => (
-            <div className="card mt-4 mx-2" style={{ maxWidth: 400 }} key={job._id}>
+            <article role="listitem" aria-label={`Job ${job.title}`} className="card mt-4 mx-2" style={{ maxWidth: 400 }} key={job._id}>
               <div className="card-body">
                 <h4 className="card-title">{job.title}</h4>
                 <p><b>Category:</b> {job.category}</p>
@@ -57,11 +59,11 @@ function Review() {
                 <p><b>Contact:</b> {job.contactNumber}</p>
                 <p><b>Posted:</b> {job.createdAt ? new Date(job.createdAt).toLocaleString() : "-"}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
-        <a href="/RecLanding" className="btn btn-primary mt-4">Go to Recruiter Dashboard</a>
-      </div>
+        <a href="/RecLanding" className="btn btn-primary mt-4" aria-label="Go to Recruiter Dashboard">Go to Recruiter Dashboard</a>
+      </main>
     </div>
   );
 }

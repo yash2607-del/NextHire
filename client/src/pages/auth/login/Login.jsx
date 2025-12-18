@@ -5,10 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+      try {
       const res = await fetch("http://localhost:8000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,10 +41,12 @@ function Login() {
           window.location.href = target;
         }, 800);
       } else {
+        setError(data.error || "Login failed");
         toast.error(data.error || "Login failed");
       }
     } catch (error) {
       console.error("Login error:", error);
+      setError("An error occurred. Please try again.");
       toast.error("An error occurred. Please try again.");
     }
   };
@@ -55,32 +58,41 @@ function Login() {
         <div className="container">
           <div className="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
             <form className="rounded bg-white shadow p-5" onSubmit={handleSubmit}>
-              <h1 className="text-dark fw-bolder fs-4 mb-2">Login Form</h1>
+              <h1 className="text-dark fw-bolder fs-4 mb-2">Login</h1>
+
+              <div id="login-error" role="alert" aria-live="polite" style={{position:'relative',minHeight:20}}>
+                {error && <div className="text-danger">{error}</div>}
+              </div>
 
               <div className="form-floating mb-3">
                 <input
                   type="email"
                   className="form-control"
-                  id="floating-input"
+                  id="login-email"
+                  aria-label="Email Address"
+                  aria-required="true"
+                  aria-describedby={error ? "login-error" : undefined}
                   placeholder="xyz@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <label htmlFor="floatingInput">Email Address</label>
+                <label htmlFor="login-email">Email Address</label>
               </div>
 
               <div className="form-floating mb-3">
                 <input
                   type="password"
                   className="form-control"
-                  id="floatingPassword"
+                  id="login-password"
+                  aria-label="Password"
+                  aria-required="true"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <label htmlFor="floatingPassword">Password</label>
+                <label htmlFor="login-password">Password</label>
               </div>
 
               <div className="btn-group w-100 mb-3">

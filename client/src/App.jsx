@@ -23,15 +23,22 @@ import ApplicantDashboard from "./pages/applicant/ApplicantDashboard";
 import ApplicantLayout from "./pages/applicant/ApplicantLayout";
 import MyApplications from "./pages/applicant/MyApplications";
 import ApplicantProfile from "./pages/applicant/ApplicantProfile";
+import Profile from "./pages/profile/Profile";
 import ApplicantSettings from "./pages/applicant/ApplicantSettings";
 import JobApply from "./pages/applicant/JobApply";
 import { RecruiterProvider } from "./context/RecruiterContext";
+import { A11yProvider } from "./context/A11yContext";
+import AccessibilityPanel from "./components/AccessibilityPanel";
+import Settings from "./pages/settings/Settings";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
+        <A11yProvider>
+        <a className="skip-link" href="#main-content">Skip to main content</a>
+        <main id="main-content" tabIndex={-1} role="main">
+          <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot" element={<Forgot />} />
@@ -46,17 +53,22 @@ function App() {
             <Route path="/RecForm4" element={<RecruiterProvider><RecForm4 /></RecruiterProvider>} />
             <Route path="/Review" element={<Review />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/recruiter/jobs/:jobId" element={<ApplicantList />} />
           </Route>
           <Route element={<ApplicantLayout />}>
             <Route path="/applicant/jobs" element={<ApplicantDashboard />} />
             <Route path="/applicant/applications" element={<MyApplications />} />
-            <Route path="/applicant/profile" element={<ApplicantProfile />} />
-            <Route path="/applicant/settings" element={<ApplicantSettings />} />
+            <Route path="/applicant/profile" element={<Profile />} />
+            <Route path="/applicant/settings" element={<Settings />} />
             <Route path="/applicant/jobs/:jobId/apply" element={<JobApply />} />
           </Route>
           <Route path="/jobs/:jobId" element={<JobDetails />} />
-        </Routes>
+          </Routes>
+        </main>
+        <AccessibilityPanel />
+        </A11yProvider>
       </BrowserRouter>
     </>
   );

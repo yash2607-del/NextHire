@@ -1,9 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
 import { useRecruiterForm } from "../../../context/RecruiterContext";
 
 function RecruiterForm() {
+  const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const { formData, setFormData } = useRecruiterForm();
 
@@ -16,11 +18,14 @@ function RecruiterForm() {
     (formData.companyName?.trim() || "") !== "" &&
     (formData.companyWebsite?.trim() || "") !== "";
 
-  const handleContinue = () => {
+  const handleContinue = (e) => {
     if (isFormValid) {
       navigate("/RecForm2");
     } else {
-      alert("Please fill in all required fields.");
+      setStatus("Please fill in all required fields.");
+      // focus the first invalid input for keyboard users
+      const el = document.querySelector('#CompanyName, #website');
+      if (el) el.focus();
     }
   };
 
@@ -31,8 +36,13 @@ function RecruiterForm() {
 
       <div className="container d-flex justify-content-center">
         <div className="w-100" style={{ maxWidth: "600px" }}>
-          <h3>Company Information</h3>
+          <h2>Company Information</h2>
 
+          <div id="company-status" role="status" aria-live="polite" style={{minHeight:20}}>
+            {status && <span className="text-danger">{status}</span>}
+          </div>
+
+          <form role="form" aria-labelledby="company-info-form">
           <div className="mb-3">
             <label htmlFor="CompanyName" className="form-label fw-bold">
               Company name <span className="text-danger">*</span>
@@ -85,10 +95,12 @@ function RecruiterForm() {
               type="button"
               className="btn btn-primary"
               onClick={handleContinue}
+              aria-label="Continue to next step"
             >
               Continue
             </button>
           </div>
+          </form>
         </div>
       </div>
     </div>

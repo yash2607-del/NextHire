@@ -1,8 +1,71 @@
-*{
-      font-family: "Poppins", serif;
-      font-weight: 270;
-      font-style: normal;
+:root{
+      --color-bg: #ffffff;
+      --color-text: #111827;
+      --color-primary: #0d47a1;
+      --color-primary-contrast: #ffffff;
+      --focus-ring: 3px solid #ffbf47;
+      --high-contrast-bg: #000000;
+      --high-contrast-text: #ffffff;
+}
 
+*{box-sizing: border-box}
+html,body,#root{height:100%}
+body{
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin:0;
+      background:var(--color-bg);
+      color:var(--color-text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+}
+
+/* Skip link — visible on keyboard focus */
+.skip-link{
+      position:absolute;
+      left:0;
+      top:0;
+      transform:translateY(-120%);
+      background:#fff;
+      color:#000;
+      padding:8px 12px;
+      z-index:1000;
+      text-decoration:none;
+}
+.skip-link:focus{transform:none; box-shadow:0 2px 6px rgba(0,0,0,0.12);}
+
+/* Focus styles */
+:focus{outline: none}
+:focus-visible{outline: var(--focus-ring); outline-offset: 2px}
+
+/* High contrast utility */
+.hc{background:var(--high-contrast-bg); color:var(--high-contrast-text)}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce){
+      *{transition:none !important; animation:none !important}
+}
+
+/* Forms: ensure labels and inputs are readable */
+label{font-size:0.95rem}
+.form-control:focus{box-shadow:none}
+
+/* Ensure buttons show clear focus */
+.btn:focus-visible{outline: var(--focus-ring); outline-offset: 2px}
+
+/* Font size classes */
+.font-small{font-size:14px}
+.font-medium{font-size:16px}
+.font-large{font-size:18px}
+
+/* Reduced motion class */
+.reduced-motion * {
+      transition: none !important;
+      animation: none !important;
+}
+
+/* Ensure scalable layout when text is increased */
+html.font-large body, html.font-medium body, html.font-small body {
+      line-height:1.4;
 }
 
 

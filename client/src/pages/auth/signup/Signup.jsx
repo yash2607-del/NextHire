@@ -6,6 +6,7 @@ import "./signup.css";
 
 function Signup() {
   const [role, setRole] = useState("Applicant");
+  const [error, setError] = useState("");
 
   // Common
   const [email, setEmail] = useState("");
@@ -32,6 +33,7 @@ function Signup() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
+      setError("Passwords do not match");
       toast.error("Passwords do not match");
       return;
     }
@@ -66,7 +68,9 @@ function Signup() {
         window.location.href='/login';
       },1500)
     } catch (error) {
-      toast.error(error.response?.data?.error || "Signup failed");
+      const msg = error.response?.data?.error || "Signup failed";
+      setError(msg);
+      toast.error(msg);
     }
   };
 
@@ -77,7 +81,11 @@ function Signup() {
         <div className="container">
           <div className="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
             <form className="rounded bg-white shadow p-5" onSubmit={handleSubmit}>
-              <h6 className="text-dark fw-bolder fs-4 mb-2">Sign In as</h6>
+              <h6 className="text-dark fw-bolder fs-4 mb-2">Sign Up</h6>
+
+              <div id="signup-error" role="alert" aria-live="polite" style={{minHeight:20}}>
+                {error && <div className="text-danger">{error}</div>}
+              </div>
 
               <div className="btn-group w-100 mb-5" role="group">
                 <button
@@ -99,38 +107,48 @@ function Signup() {
               {/* Email and Password */}
               <div className="form-floating mb-3">
                 <input
+                  id="signup-email"
                   type="email"
                   className="form-control"
+                  aria-label="Email Address"
+                  aria-required="true"
+                  aria-describedby={error ? "signup-error" : undefined}
                   placeholder="xyz@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <label>Email Address</label>
+                <label htmlFor="signup-email">Email Address</label>
               </div>
 
               <div className="form-floating mb-3">
                 <input
+                  id="signup-password"
                   type="password"
                   className="form-control"
+                  aria-label="Password"
+                  aria-required="true"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <label>Password</label>
+                <label htmlFor="signup-password">Password</label>
               </div>
 
               <div className="form-floating mb-3">
                 <input
+                  id="signup-confirm"
                   type="password"
                   className="form-control"
+                  aria-label="Confirm Password"
+                  aria-required="true"
                   placeholder="Confirm Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
-                <label>Confirm Password</label>
+                <label htmlFor="signup-confirm">Confirm Password</label>
               </div>
 
               {/* Recruiter Fields */}

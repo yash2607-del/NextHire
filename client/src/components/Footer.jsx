@@ -9,7 +9,7 @@ export default function Footer() {
               <a
                 href="/"
                 className="d-inline-flex align-items-center text-dark text-xl fs-4 font-weight-bold gap-2"
-                aria-label="logo"
+                aria-label="NextHire home"
               >
                 NextHire
               </a>
@@ -24,6 +24,8 @@ export default function Footer() {
               <a
                 href="#"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram (opens in new tab)"
                 className="text-muted transition duration-100"
               >
                 <svg
@@ -41,6 +43,8 @@ export default function Footer() {
               <a
                 href="#"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter (opens in new tab)"
                 className="text-muted transition duration-100"
               >
                 <svg
@@ -58,6 +62,8 @@ export default function Footer() {
               <a
                 href="#"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn (opens in new tab)"
                 className="text-muted transition duration-100"
               >
                 <svg
@@ -75,6 +81,8 @@ export default function Footer() {
               <a
                 href="#"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub (opens in new tab)"
                 className="text-muted transition duration-100"
               >
                 <svg

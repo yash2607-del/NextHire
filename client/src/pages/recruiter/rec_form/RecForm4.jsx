@@ -17,22 +17,23 @@ function RecForm4() {
     setAdditionalInfo(formData.additionalInfo || "");
   }, [formData]);
 
+  const [status, setStatus] = useState("");
+
   const handleSubmit = async () => {
     // Get JWT token from localStorage (or your auth context)
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("You must be logged in as a recruiter to post a job.");
-      navigate("/login");
+      setStatus("You must be logged in as a recruiter to post a job.");
+      setTimeout(()=> navigate("/login"), 1200);
       return;
     }
 
-    // Debug: Decode token to show role
+    // Debug: Decode token to show role (no user-facing alert)
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      console.log('Debug: Token payload:', payload);
-      alert(`Debug: Token role: ${payload.role}, userId: ${payload.userId}`);
+      const payloadDebug = JSON.parse(atob(token.split('.')[1]));
+      console.debug('Token payload:', payloadDebug);
     } catch (e) {
-      console.error('Debug: Failed to decode token:', e);
+      console.debug('Failed to decode token:', e);
     }
 
     const payload = {
@@ -53,11 +54,18 @@ function RecForm4() {
 
     // Frontend validation
     const missing = [];
-    ["title","category","location","jobDescription","deadline","contactNumber"].forEach(key => {
-      if (!payload[key]) missing.push(key);
-    });
+    if (!payload.title) missing.push('title');
+    if (!payload.category) missing.push('category');
+    if (!payload.location) missing.push('location');
+    if (!payload.jobDescription) missing.push('jobDescription');
+    if (!payload.deadline) missing.push('deadline');
+    if (!payload.contactNumber) missing.push('contactNumber');
+
     if (missing.length) {
-      alert("Missing required: " + missing.join(", "));
+      setStatus('Missing required: ' + missing.join(', '));
+      const selector = missing[0] === 'title' ? '#JobTitle' : missing[0] === 'category' ? '#jobCategory' : missing[0] === 'location' ? '#jobLocation' : missing[0] === 'jobDescription' ? '#jobDescription' : missing[0] === 'deadline' ? 'input[type="date"]' : 'input[type="tel"]';
+      const first = document.querySelector(selector);
+      if (first) first.focus();
       return;
     }
 
@@ -65,24 +73,26 @@ function RecForm4() {
       const res = await axios.post("http://localhost:8000/api/jobs", payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      alert(res.data.message || "Job posted successfully!");
-      navigate("/Review");
+      setStatus(res.data.message || "Job posted successfully!");
+      setTimeout(() => navigate("/Review"), 800);
     } catch (err) {
-      const status = err.response?.status;
-      if (status === 401 || status === 403) {
-        alert("You are not authorized. Please login as a recruiter.");
-        navigate("/login");
+      const statusCode = err.response?.status;
+      if (statusCode === 401 || statusCode === 403) {
+        setStatus("You are not authorized. Please login as a recruiter.");
+        setTimeout(()=> navigate("/login"), 1000);
         return;
       }
       console.error("Submission error:", err.response?.data || err.message);
-      alert("Backend validation failed:\n" + JSON.stringify(err.response?.data?.errors || err.response?.data || err.message, null, 2));
+      setStatus("Backend validation failed: " + JSON.stringify(err.response?.data?.errors || err.response?.data || err.message));
     }
   };
 
   return (
     <>
       <h2 className="mb-4 text-center" style={{ color: '#0d47a1', fontWeight: 700 }}>Confirm & Submit Job Posting</h2>
-      <div className="mx-auto" style={{ maxWidth: 600 }}>
+      <div id="recform4-status" role="status" aria-live="polite" style={{minHeight:20}}>{status && <span>{status}</span>}</div>
+      <div className="mx-auto" style={{ maxWidth: 600 }} role="region" aria-labelledby="review-heading">
+        <div style={{display:'none'}} id="review-heading">Review job details</div>
         <p><b>Title:</b> {formData.JobTitle}</p>
         <p><b>Category:</b> {formData.jobCategory}</p>
         <p><b>Type:</b> {formData.jobType}</p>
