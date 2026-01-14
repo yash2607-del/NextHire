@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecruiterForm } from "../../../context/RecruiterContext";
+import './RecruiterForm.css';
 
 function RecForm3() {
   const navigate = useNavigate();
@@ -46,7 +47,6 @@ function RecForm3() {
 
   const handleContinue = () => {
     if (selectedDisabilities.length === 0) {
-      // announce missing selection and focus first checkbox
       setStatus("Please select at least one disability option.");
       const firstCheckbox = document.querySelector('input[id^="disability-"]');
       if (firstCheckbox) firstCheckbox.focus();
@@ -60,66 +60,78 @@ function RecForm3() {
       otherAssistiveTools: otherAssistiveTools.trim(),
     });
 
-    navigate("/RecForm4");
+    navigate("/recruiter/form/step4");
   };
 
+  const goBack = () => navigate('/recruiter/form/step2');
+  const goHome = () => navigate('/recruiter/dashboard');
+
   return (
-    <>
-      <h2 className="mb-4" style={{ color: '#0d47a1', fontWeight: 700 }}>Accessibility and Disability Inclusion Details</h2>
-      <div className="w-100" style={{ maxWidth: "600px" }}>
-        <div id="recform3-status" role="status" aria-live="polite" style={{minHeight:20}}>{status && <span className="text-danger">{status}</span>}</div>
-          {/* Disabilities */}
-          <fieldset className="mb-3" aria-required="true" aria-labelledby="disabilities-legend">
-            <legend id="disabilities-legend" className="form-label fw-bold">Job is inclusive for (select all that apply)</legend>
-            <div className="row">
-              {disabilities.map((disability, index) => (
-                <div className="col-md-6" key={index}>
-                  <div className="form-check">
+    <div className="recruiter-form-wrapper">
+      <div className="recruiter-form-container">
+        <div className="form-nav-header">
+          <div className="form-header" style={{ border: 'none', padding: 0, margin: 0 }}>
+            <div className="form-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="8.5" cy="7" r="4"/>
+                <polyline points="17 11 19 13 23 9"/>
+              </svg>
+            </div>
+            <h2 className="form-title">Accessibility & Inclusion</h2>
+          </div>
+          <button onClick={goHome} className="btn-back-home">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Home
+          </button>
+        </div>
+        <div className="form-status" role="status" aria-live="polite">{status}</div>
+          <div className="form-group">
+            <fieldset aria-required="true" aria-labelledby="disabilities-legend">
+              <legend id="disabilities-legend" className="form-label">Job is inclusive for <span className="required">*</span></legend>
+              <div className="checkbox-grid">
+                {disabilities.map((disability, index) => (
+                  <label className="checkbox-item" key={index}>
                     <input
                       type="checkbox"
-                      className="form-check-input"
                       id={`disability-${index}`}
                       checked={selectedDisabilities.includes(disability)}
                       onChange={() => handleDisabilityChange(disability)}
                     />
-                    <label className="form-check-label" htmlFor={`disability-${index}`}>
-                      {disability}
-                    </label>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </fieldset>
+                    <span className="checkbox-label">{disability}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          </div>
 
-          {/* Accessibility options */}
-          <fieldset className="mb-3" aria-labelledby="accommodations-legend">
-            <legend id="accommodations-legend" className="form-label fw-bold">Accommodations Provided (select all that apply)</legend>
-            <div className="row">
-              {options.map((option, idx) => (
-                <div className="col-md-6" key={idx}>
-                  <div className="form-check">
+          <div className="form-group">
+            <fieldset aria-labelledby="accommodations-legend">
+              <legend id="accommodations-legend" className="form-label">Accommodations Provided</legend>
+              <div className="checkbox-grid">
+                {options.map((option, idx) => (
+                  <label className="checkbox-item" key={idx}>
                     <input
                       type="checkbox"
-                      className="form-check-input"
                       id={`access-${idx}`}
                       checked={accessibilities.includes(option)}
                       onChange={() => handleAccessibilityChange(option)}
                     />
-                    <label className="form-check-label" htmlFor={`access-${idx}`}>
-                      {option}
-                    </label>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </fieldset>
+                    <span className="checkbox-label">{option}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          </div>
 
-          {/* Other tools */}
-          <div className="mb-3">
-            <label htmlFor="additionalTools" className="form-label fw-bold">Other Assistive Tools (Optional)</label>
+          <div className="form-group">
+            <label htmlFor="additionalTools" className="form-label">Other Assistive Tools <span style={{ color: '#94a3b8', fontWeight: 400 }}>(Optional)</span></label>
             <input
               type="text"
-              className="form-control"
+              className="form-input"
               id="additionalTools"
               placeholder="e.g. Braille printer, magnification software"
               value={otherAssistiveTools}
@@ -127,21 +139,31 @@ function RecForm3() {
             />
           </div>
 
-          {/* Continue Button */}
-          <div className="d-flex justify-content-end mb-5 mt-2">
+          <div className="form-actions">
+            <button type="button" className="btn-form btn-form-back" onClick={goBack}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="19" y1="12" x2="5" y2="12"/>
+                <polyline points="12 19 5 12 12 5"/>
+              </svg>
+              Back
+            </button>
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn-form btn-form-primary"
               onClick={handleContinue}
               disabled={selectedDisabilities.length === 0}
               aria-disabled={selectedDisabilities.length === 0}
-              aria-label="Continue to accessibility accommodations"
+              aria-label="Continue to final review"
             >
               Continue
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
             </button>
-        </div>
+          </div>
       </div>
-    </>
+    </div>
   );
 }
 

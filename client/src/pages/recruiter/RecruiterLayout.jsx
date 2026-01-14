@@ -1,79 +1,59 @@
 import React from "react";
-import { NavLink, useLocation, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import "../applicant/ApplicantLayout.css";
 
 const navLinks = [
-  { label: "My Jobs", path: "/dashboard" },
-  { label: "Post a Job", path: "/RecruiterForm" },
-  { label: "Settings", path: "/settings" },
-  { label: "My Profile", path: "/profile" },
+  { label: "My Jobs", path: "/recruiter/dashboard", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="16" height="20" stroke="currentColor" strokeWidth="2"/><path d="M9 22V18H15V22M9 6H11M9 10H11M9 14H11M15 6H13M15 10H13M15 14H13" stroke="currentColor" strokeWidth="2"/></svg> },
+  { label: "Post a Job", path: "/recruiter/form", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg> },
+  { label: "My Profile", path: "/recruiter/profile", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2"/></svg> },
+  { label: "Settings", path: "/recruiter/settings", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/><path d="M12 1V3M12 21V23M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M1 12H3M21 12H23M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg> },
 ];
 
 function RecruiterLayout() {
-  const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = React.useState(true);
-
-  // Responsive: collapse sidebar on small screens
-  React.useEffect(() => {
-    const handleResize = () => {
-      setSidebarOpen(window.innerWidth > 768);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <div className="d-flex" style={{ minHeight: "100vh", background: "#f7faff" }}>
-      {/* Sidebar */}
-      <nav
-        className={`d-flex flex-column p-3 bg-white shadow-sm position-relative ${sidebarOpen ? "" : "d-none d-md-flex"}`}
-        style={{ width: sidebarOpen ? 250 : 0, minHeight: "100vh", transition: "width 0.2s" }}
-        aria-label="Recruiter navigation"
-      >
-        <div className="d-flex align-items-center justify-content-between mb-4">
-          <h3 style={{ fontWeight: 700, letterSpacing: 1, color: "#0d47a1" }}>Recruiter</h3>
-          <button
-            className="btn btn-sm btn-outline-secondary d-md-none"
-            aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
-            onClick={() => setSidebarOpen((open) => !open)}
-            style={{ marginLeft: 8 }}
-          >
-            {sidebarOpen ? <span aria-hidden>×</span> : <span aria-hidden>☰</span>}
-          </button>
+    <div className="layout-container">
+      <nav className="modern-sidebar" aria-label="Recruiter navigation">
+        <div className="sidebar-header">
+          <h3 className="sidebar-title">Recruiter</h3>
         </div>
-        <ul className="nav flex-column gap-2" style={{ listStyle: "none", paddingLeft: 0 }}>
+
+        <ul className="sidebar-nav">
           {navLinks.map((link) => (
             <li key={link.path}>
               <NavLink
                 to={link.path}
-                className={({ isActive }) => `btn btn-link text-start w-100 ${isActive ? "fw-bold text-primary" : "text-dark"}`}
-                style={({ isActive }) => ({ textDecoration: "none", background: isActive ? "#e3f0fc" : "transparent", borderRadius: 6 })}
+                className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`}
                 aria-label={link.label}
-                tabIndex={0}
               >
-                {link.label}
+                <span className="link-icon">{link.icon}</span>
+                <span className="link-label">{link.label}</span>
               </NavLink>
             </li>
           ))}
         </ul>
-        <div className="mt-auto pt-4 d-flex flex-column gap-2">
+
+        <div className="sidebar-footer">
           <button
-            className="btn btn-outline-danger btn-sm"
+            className="logout-btn"
             onClick={() => {
               localStorage.removeItem("token");
-              // clear any user-specific keys if used
-              try { localStorage.removeItem("user"); } catch(e) {}
-              window.location.href = "/login";
+              localStorage.removeItem("user");
+              window.location.href = "/";
             }}
             aria-label="Logout"
           >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16 17L21 12L16 7M21 12H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             Logout
           </button>
-          <small className="text-secondary">&copy; {new Date().getFullYear()} NextHire</small>
+          <div className="copyright">
+            <small>&copy; {new Date().getFullYear()} NextHire</small>
+          </div>
         </div>
       </nav>
-      {/* Main Content */}
-      <main className="flex-grow-1 p-4" style={{ minWidth: 0 }}>
+      <main className="main-content">
         <Outlet />
       </main>
     </div>

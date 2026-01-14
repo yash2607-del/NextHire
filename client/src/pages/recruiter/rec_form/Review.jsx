@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
-import axios from "axios";
+import { getMyJobs } from '../../../api';
+import { getAuthToken } from '../../../utils/auth';
+import axios from 'axios';
 
 
 function Review() {
@@ -13,7 +16,7 @@ function Review() {
       setLoading(true);
       setError("");
       try {
-        const token = localStorage.getItem("token");
+        const token = getAuthToken();
         if (!token) throw new Error("Not logged in");
         const res = await axios.get("http://localhost:8000/api/jobs/my", {
           headers: { Authorization: `Bearer ${token}` }
@@ -62,7 +65,7 @@ function Review() {
             </article>
           ))}
         </div>
-        <a href="/RecLanding" className="btn btn-primary mt-4" aria-label="Go to Recruiter Dashboard">Go to Recruiter Dashboard</a>
+        <Link to="/recruiter/dashboard" className="btn btn-primary mt-4" aria-label="Go to Recruiter Dashboard">Go to Recruiter Dashboard</Link>
       </main>
     </div>
   );

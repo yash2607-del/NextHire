@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./RecLanding.css";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
@@ -13,12 +14,8 @@ function RecLanding(){
           <h1>Recruiter Portal</h1>
           <h5 className="mb-4">Manage your jobs, view applicants, and find your next hire.</h5>
           <div className="d-flex flex-wrap justify-content-center gap-3 mb-3">
-            <a href="/RecruiterForm">
-              <button className="cta-button">Post a Job</button>
-            </a>
-            <a href="/review">
-              <button className="btn btn-outline-primary">My Jobs</button>
-            </a>
+            <Link to="/RecruiterForm" className="cta-button" style={{ textDecoration: 'none', padding: '0.75rem 1.5rem', borderRadius: '8px' }}>Post a Job</Link>
+            <Link to="/review" className="btn btn-outline-primary">My Jobs</Link>
           </div>
         </div>
         <div className="image-section">
@@ -104,9 +101,9 @@ function RecLanding(){
       <div className="landing-container">
         <div className="text-section">
           <h1>GET STARTED IN MINUTES✓</h1>
-          <a href="/RecruiterForm">
-          <b className="cta-button">Post a job</b>
-          </a>
+          <Link to="/RecruiterForm" className="cta-button" style={{ textDecoration: 'none', display: 'inline-block', padding: '0.75rem 1.5rem', borderRadius: '8px' }}>
+            <b>Post a job</b>
+          </Link>
         </div>
       </div> 
     </div>

@@ -1,114 +1,142 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
+import "./Login.css";
+import { setAuthToken, getCurrentUser } from '../../../utils/auth';
+import { getDashboardRoute, ROUTES } from '../../../config/routes';
+import { loginUser } from '../../../api';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-      const res = await fetch("http://localhost:8000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+    setLoading(true);
+    setError("");
+    
+    try {
+      const response = await loginUser({ email, password });
+      const { token, role, userId } = response.data;
 
-      const data = await res.json();
+      // Store token and user data
+      setAuthToken(token, { role, userId, email });
+      
+      toast.success("Login successful!");
 
-      if (res.ok) {
-        localStorage.setItem("token", data.token);
-        toast.success("Login successful!");
-
-        // decode JWT payload to decide where to land the user
-        const parseJwt = (token) => {
-          try {
-            const payload = token.split('.')[1];
-            const decoded = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
-            return decoded;
-          } catch (err) {
-            return null;
-          }
-        };
-
-        const decoded = parseJwt(data.token);
-        const role = decoded?.role;
-        const target = role === 'recruiter' ? '/dashboard' : '/applicant/jobs';
-
-        setTimeout(() => {
-          window.location.href = target;
-        }, 800);
-      } else {
-        setError(data.error || "Login failed");
-        toast.error(data.error || "Login failed");
-      }
+      // Get redirect path from location state or use role-based dashboard
+      const from = location.state?.from?.pathname || getDashboardRoute(role);
+      
+      setTimeout(() => {
+        navigate(from, { replace: true });
+      }, 500);
+      
     } catch (error) {
       console.error("Login error:", error);
-      setError("An error occurred. Please try again.");
-      toast.error("An error occurred. Please try again.");
+      const errorMsg = error.response?.data?.error || "An error occurred. Please try again.";
+      setError(errorMsg);
+      toast.error(errorMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
-      <ToastContainer />
-      <section className="wrapper">
-        <div className="container">
-          <div className="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-center">
-            <form className="rounded bg-white shadow p-5" onSubmit={handleSubmit}>
-              <h1 className="text-dark fw-bolder fs-4 mb-2">Login</h1>
-
-              <div id="login-error" role="alert" aria-live="polite" style={{position:'relative',minHeight:20}}>
-                {error && <div className="text-danger">{error}</div>}
+      <ToastContainer position="top-right" autoClose={3000} />
+      <div className="auth-wrapper">
+        <div className="auth-container">
+          <div className="auth-card">
+            <div className="auth-header">
+              <div className="auth-logo">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
+              <h1 className="auth-title">Welcome Back</h1>
+              <p className="auth-subtitle">Sign in to your NextHire account</p>
+            </div>
 
-              <div className="form-floating mb-3">
+            <form className="auth-form" onSubmit={handleSubmit}>
+              {error && (
+                <div className="error-message" role="alert" aria-live="polite">
+                  <svg className="error-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M12 8V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M12 16H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                  {error}
+                </div>
+              )}
+
+              <div className="form-group">
+                <label htmlFor="login-email" className="form-label">Email Address</label>
                 <input
                   type="email"
-                  className="form-control"
                   id="login-email"
-                  aria-label="Email Address"
-                  aria-required="true"
-                  aria-describedby={error ? "login-error" : undefined}
-                  placeholder="xyz@company.com"
+                  className="form-input"
+                  placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={loading}
+                  aria-label="Email Address"
+                  aria-required="true"
                 />
-                <label htmlFor="login-email">Email Address</label>
               </div>
 
-              <div className="form-floating mb-3">
+              <div className="form-group">
+                <label htmlFor="login-password" className="form-label">Password</label>
                 <input
                   type="password"
-                  className="form-control"
                   id="login-password"
-                  aria-label="Password"
-                  aria-required="true"
-                  placeholder="Password"
+                  className="form-input"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={loading}
+                  aria-label="Password"
+                  aria-required="true"
                 />
-                <label htmlFor="login-password">Password</label>
               </div>
 
-              <div className="btn-group w-100 mb-3">
-                <button type="submit" className="btn btn-primary w-100">Login</button>
+              <div className="auth-actions">
+                <button type="submit" className="btn-auth btn-primary" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <span className="spinner"></span>
+                      Signing in...
+                    </>
+                  ) : (
+                    "Sign In"
+                  )}
+                </button>
               </div>
 
-              <p className="mt-2 text-center text-sm text-gray-600 mb-5">
-                New Member?
-                <a className="sign-in" href="/signup"> Sign Up</a>
-              </p>
-
-              <a href='/forgot' className='mt-2 text-center text-sm text-gray-600 mb-5'> Forgot Password?</a>
+              <div className="auth-links">
+                <Link to="/forgot" className="auth-link">Forgot password?</Link>
+              </div>
             </form>
+
+            <div className="auth-footer">
+              <p className="auth-footer-text">
+                Don't have an account?
+                <Link to="/signup" className="auth-footer-link">Sign up</Link>
+              </p>
+              <p className="auth-footer-text" style={{ marginTop: '0.5rem' }}>
+                <Link to="/" className="auth-link">← Back to home</Link>
+              </p>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }

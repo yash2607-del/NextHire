@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getUserApplications } from '../../api';
 
 export default function MyApplications() {
   const [apps, setApps] = useState([]);
@@ -10,10 +10,7 @@ export default function MyApplications() {
     const fetch = async () => {
       setLoading(true);
       try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:8000/api/applications/user", {
-          headers: token ? { Authorization: `Bearer ${token}` } : {}
-        });
+        const res = await getUserApplications();
         // server returns { applications: [...] } — handle both shapes
         const appsData = Array.isArray(res.data)
           ? res.data
