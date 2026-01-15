@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/AuthRoutes.js";
@@ -77,13 +78,17 @@ app.use("/api/contact", contactRoutes);
 // Serve static files from the React app in production
 if (NODE_ENV === 'production') {
   const clientBuildPath = path.join(__dirname, '../client/dist');
-  app.use(express.static(clientBuildPath));
 
-  // Handle React routing - return index.html for any non-API routes
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
-    return res.sendFile(path.join(clientBuildPath, 'index.html'));
-  });
+  // Only serve the built client if it exists (Railway backend-only deploy won't have it)
+  if (fs.existsSync(clientBuildPath)) {
+    app.use(express.static(clientBuildPath));
+
+    // Handle React routing - return index.html for any non-API routes
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api')) return next();
+      return res.sendFile(path.join(clientBuildPath, 'index.html'));
+    });
+  }
 }
 
 // Health check endpoint
