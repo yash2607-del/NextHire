@@ -44,7 +44,12 @@ function Login() {
       
     } catch (error) {
       console.error("Login error:", error);
-      const errorMsg = error.response?.data?.error || "An error occurred. Please try again.";
+      const apiData = error?.response?.data;
+      const errorMsg =
+        (typeof apiData?.error === "string" && apiData.error) ||
+        (typeof apiData?.message === "string" && apiData.message) ||
+        (typeof error?.message === "string" && error.message) ||
+        "An error occurred. Please try again.";
       setError(errorMsg);
       toast.error(errorMsg);
     } finally {
