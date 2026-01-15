@@ -4,11 +4,16 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import path from "path";
+import { fileURLToPath } from "url";
 import authRoutes from "./routes/AuthRoutes.js";
 import recruitRoutes from "./routes/RecruitRoute.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
-import { User } from "./models/User.js"; 
+import { User, Applicant, Recruiter } from "./models/User.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); 
 
 dotenv.config();
 
@@ -68,6 +73,18 @@ app.use("/api", authRoutes);
 app.use("/api", recruitRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/contact", contactRoutes);
+
+// Serve static files from the React app in production
+if (NODE_ENV === 'production') {
+  const clientBuildPath = path.join(__dirname, '../client/dist');
+  app.use(express.static(clientBuildPath));
+
+  // Handle React routing - return index.html for any non-API routes
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    return res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
+}
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {

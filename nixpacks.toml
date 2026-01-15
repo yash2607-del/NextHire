@@ -1,0 +1,13 @@
+# Nixpacks configuration for Railway (monorepo)
+# This deploys the backend (Express) from /server.
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = [
+  "npm install --prefix server"
+]
+
+[start]
+cmd = "npm start --prefix server"
