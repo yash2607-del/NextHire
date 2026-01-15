@@ -92,11 +92,35 @@ app.get("/api/profile", async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findOne({ email: decoded.email }).select("name email");
+    const user = await User.findOne({ email: decoded.email }).select("name email role");
 
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    res.json({ name: user.name, email: user.email });
+    const profileData = {
+      name: user.name,
+      email: user.email,
+      role: user.role
+    };
+
+    // Fetch additional role-specific data
+    if (user.role === "applicant") {
+      const applicantData = await Applicant.findOne({ userId: user._id });
+      if (applicantData) {
+        profileData.location = applicantData.location;
+        profileData.experience = applicantData.experience;
+        profileData.jobType = applicantData.jobType;
+      }
+    } else if (user.role === "recruiter") {
+      const recruiterData = await Recruiter.findOne({ userId: user._id });
+      if (recruiterData) {
+        profileData.company = recruiterData.company;
+        profileData.location = recruiterData.location;
+        profileData.jobTitle = recruiterData.jobTitle;
+        profileData.industry = recruiterData.industry;
+      }
+    }
+
+    res.json(profileData);
   } catch (err) {
     console.error("Profile fetch error:", err.message);
     res.status(401).json({ error: "Invalid token" });
