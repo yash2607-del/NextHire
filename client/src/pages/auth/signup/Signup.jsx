@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../login/Login.css";
+import { pageTransition } from "../../../utils/animations";
 
 function Signup() {
   const [role, setRole] = useState("Applicant");
@@ -26,6 +27,11 @@ function Signup() {
   const [companyLocation, setCompanyLocation] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [industryType, setIndustryType] = useState("");
+
+  useEffect(() => {
+    // Initialize page transition animation
+    pageTransition();
+  }, []);
 
   const toggleRole = (selectedRole) => {
     setRole(selectedRole);

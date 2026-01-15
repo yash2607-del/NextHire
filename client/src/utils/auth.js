@@ -65,7 +65,7 @@ export const isTokenExpired = (token) => {
     // Add 5 second buffer
     const currentTime = Date.now() / 1000;
     return decoded.exp < currentTime + 5;
-  } catch (error) {
+  } catch {
     return true;
   }
 };

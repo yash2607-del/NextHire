@@ -70,8 +70,8 @@ function App() {
             <Route path="/applicant/dashboard" element={<ApplicantDashboard />} />
             <Route path="/applicant/jobs" element={<ApplicantDashboard />} />
             <Route path="/applicant/applications" element={<MyApplications />} />
-            <Route path="/applicant/profile" element={<Profile />} />
-            <Route path="/applicant/settings" element={<Settings />} />
+            <Route path="/applicant/profile" element={<ApplicantProfile />} />
+            <Route path="/applicant/settings" element={<ApplicantSettings />} />
             <Route path="/applicant/jobs/:jobId/apply" element={<JobApply />} />
           </Route>
           <Route path="/jobs/:jobId" element={<JobDetails />} />

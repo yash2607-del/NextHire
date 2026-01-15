@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
-import { setAuthToken, getCurrentUser } from '../../../utils/auth';
-import { getDashboardRoute, ROUTES } from '../../../config/routes';
+import { setAuthToken } from '../../../utils/auth';
+import { getDashboardRoute } from '../../../config/routes';
 import { loginUser } from '../../../api';
+import { pageTransition } from '../../../utils/animations';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,11 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    // Initialize page transition animation
+    pageTransition();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

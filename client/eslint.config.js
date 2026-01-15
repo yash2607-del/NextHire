@@ -28,6 +28,22 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+
+      // Project conventions
+      // React 17+ JSX transform doesn't require `import React`.
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^React$',
+          ignoreRestSiblings: true,
+        },
+      ],
+      // This codebase doesn't use PropTypes; rely on runtime checks or migrate to TS later.
+      'react/prop-types': 'off',
+      // Allow apostrophes/quotes in JSX text.
+      'react/no-unescaped-entities': 'off',
+
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',

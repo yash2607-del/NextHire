@@ -4,69 +4,15 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Contact from "../../components/Contact";
 import Navbar from "../../components/Navbar";
-import { CardStack } from "../../components/ui/card-stack";
+import { initScrollReveal, initStaggerReveal, pageTransition } from "../../utils/animations";
 
 function Landing() {
-  // Accessibility feature cards for CardStack
-  const ACCESSIBILITY_CARDS = [
-    {
-      id: 0,
-      name: "Semantic HTML structure",
-      designation: "Foundation",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      content: <p>Proper heading hierarchy and meaningful markup for screen readers</p>,
-    },
-    {
-      id: 1,
-      name: "Keyboard-accessible navigation",
-      designation: "Interaction",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      content: <p>Full keyboard support with visible focus indicators throughout</p>,
-    },
-    {
-      id: 2,
-      name: "Screen-reader friendly",
-      designation: "Assistive Tech",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      content: <p>Comprehensive ARIA labels, roles, and live regions</p>,
-    },
-    {
-      id: 3,
-      name: "High contrast UI",
-      designation: "Visual",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      content: <p>Carefully chosen colors meeting WCAG AA standards</p>,
-    },
-    {
-      id: 4,
-      name: "Inclusive design",
-      designation: "Philosophy",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
-      content: <p>Built with diverse users in mind from the ground up</p>,
-    },
-  ];
-
   useEffect(() => {
+    // Initialize animations
+    pageTransition();
+    initScrollReveal();
+    initStaggerReveal();
+
     // Helper function to check if element is in viewport
     const isElementInViewport = (el) => {
       if (!el) return false;
@@ -362,11 +308,11 @@ function Landing() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="landing-hero">
+      <section className="landing-hero page-enter">
         <div className="hero-grid" />
         <div className="hero-content container">
           <div className="hero-copy">
-            <div className="hero-badge">
+            <div className="hero-badge fade-in-up" style={{'--delay': '0.1s'}}>
               <span className="badge-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="12" cy="8" r="3" stroke="currentColor" strokeWidth="2"/>
@@ -376,19 +322,19 @@ function Landing() {
               </span>
               ACCESSIBLE • INCLUSIVE • FOR EVERYONE
             </div>
-            <h1 className="hero-title">
+            <h1 className="hero-title fade-in-up" style={{'--delay': '0.2s'}}>
               An <span className="highlight">accessibility-first</span> hiring platform for everyone
             </h1>
-            <p className="hero-sub">
+            <p className="hero-sub fade-in-up" style={{'--delay': '0.3s'}}>
               NextHire is a production-ready, accessibility-first hiring platform built for recruiters and applicants. Experience seamless job posting, application tracking, and inclusive design that works for everyone.
             </p>
-            <div className="hero-ctas">
-              <Link to="/signup" className="btn hero-btn-primary">Get Started</Link>
-              <Link to="/login" className="btn hero-btn-outline">Sign In →</Link>
+            <div className="hero-ctas fade-in-up" style={{'--delay': '0.4s'}}>
+              <Link to="/signup" className="btn hero-btn-primary hover-lift">Get Started</Link>
+              <Link to="/login" className="btn hero-btn-outline hover-lift">Sign In →</Link>
             </div>
           </div>
 
-          <div className="hero-visual">
+          <div className="hero-visual fade-in-up" style={{'--delay': '0.5s'}}>
             <img src="/assets/hire.png" alt="NextHire platform illustration showing inclusive hiring process" className="hero-illustration" />
             <img src="/assets/recruiter.png" className="avatar avatar-top-left" alt="Recruiter avatar" />
             <img src="/assets/form4.jpg" className="avatar avatar-top-right" alt="Application form" />
@@ -399,63 +345,61 @@ function Landing() {
       </section>
 
       {/* Core Features */}
-      <section className="features-section">
-        <div className="container">
-          <div className="section-header scroll-reveal">
-            <span className="section-pill">FEATURES</span>
-            <h2 className="section-title">Experience that grows with your scale</h2>
-            <p className="section-subtitle">
-              Empower innovation with better workflow and secure collaboration to help everyone stay organized.
+        <section className="features-section">
+          <div className="container">
+            <div className="section-header" data-scroll-reveal>
+          <span className="section-pill">FEATURES</span>  
+          <h2 className="section-title">Experience that grows with your scale</h2>
+          <p className="section-subtitle">Scale from startup to enterprise — designed to grow with your team.</p>
+             </div>
+            
+            <div className="features-grid-simple stagger-container">
+          <div className="feature-simple-card scroll-reveal-scale hover-card stagger-item" style={{'--card-index': 0}}>
+            <div className="feature-simple-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <h3>Easy tracking</h3>
+            <p>
+              We support everyone to easily track their job application status with real-time updates and notifications.
             </p>
           </div>
-          
-          <div className="features-grid-simple">
-            <div className="feature-simple-card scroll-reveal-scale" style={{'--card-index': 0}}>
-              <div className="feature-simple-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3>Easy tracking</h3>
-              <p>
-                We support everyone to easily track their job application status with real-time updates and notifications.
-              </p>
-            </div>
 
-            <div className="feature-simple-card scroll-reveal-scale" style={{'--card-index': 1}}>
-              <div className="feature-simple-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3>Multiple accounts</h3>
-              <p>
-                Different user roles for recruiters and applicants with secure authentication and role-based access control.
-              </p>
+          <div className="feature-simple-card scroll-reveal-scale" style={{'--card-index': 1}}>
+            <div className="feature-simple-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
+            <h3>Multiple accounts</h3>
+            <p>
+              Different user roles for recruiters and applicants with secure authentication and role-based access control.
+            </p>
+          </div>
 
-            <div className="feature-simple-card scroll-reveal-scale" style={{'--card-index': 2}}>
-              <div className="feature-simple-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 16V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 8H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3>Unlimited and security</h3>
-              <p>
-                We help hiring teams with full application data control with secure, WCAG-compliant workflows from both angles.
-              </p>
+          <div className="feature-simple-card scroll-reveal-scale" style={{'--card-index': 2}}>
+            <div className="feature-simple-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 16V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 8H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <h3>Unlimited and security</h3>
+            <p>
+              We help hiring teams with full application data control with secure, WCAG-compliant workflows from both angles.
+            </p>
+          </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Accessibility Features */}
+        {/* Accessibility Features */}
       <section className="accessibility-section" aria-labelledby="accessibility-heading">
         <div className="container">
           <div className="accessibility-header scroll-reveal">
@@ -584,7 +528,6 @@ function Landing() {
 
       {/* Contact component */}
       <Contact />
-
       <Footer />
     </>
   );

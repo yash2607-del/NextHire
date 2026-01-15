@@ -7,7 +7,7 @@ import './RecruiterForm.css';
 
 function RecForm4() {
   const navigate = useNavigate();
-  const { formData, setFormData } = useRecruiterForm();
+  const { formData } = useRecruiterForm();
 
   const [deadline, setDeadline] = useState(formData.deadline || "");
   const [contactNumber, setContactNumber] = useState(formData.contactNumber || "");

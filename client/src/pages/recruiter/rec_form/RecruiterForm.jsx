@@ -18,7 +18,7 @@ function RecruiterForm() {
     (formData.companyName?.trim() || "") !== "" &&
     (formData.companyWebsite?.trim() || "") !== "";
 
-  const handleContinue = (e) => {
+  const handleContinue = (_e) => {
     if (isFormValid) {
       navigate("/recruiter/form/step2");
     } else {

@@ -3,15 +3,7 @@ import { getUserApplications, getJobs } from '../../api';
 import { Link, useNavigate } from "react-router-dom";
 import JobDetailModal from '../../components/JobDetailModal';
 import "./ApplicantDashboard.css";
-
-function parseTokenRole(token) {
-  try {
-    const p = JSON.parse(atob(token.split('.')[1]));
-    return p.role;
-  } catch (e) {
-    return null;
-  }
-}
+import { initScrollReveal, initStaggerReveal, pageTransition } from '../../utils/animations';
 
 function ApplicantDashboard() {
   const [jobs, setJobs] = useState([]);
@@ -20,12 +12,16 @@ function ApplicantDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [applications, setApplications] = useState([]);
-  const [postText, setPostText] = useState("");
   const [selectedJob, setSelectedJob] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Initialize animations
+    pageTransition();
+    initScrollReveal();
+    initStaggerReveal();
+
     const fetchData = async () => {
       setLoading(true);
       setError("");

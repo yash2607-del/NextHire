@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getRecruiterJobs, deleteJob } from '../../api';
+import { initScrollReveal, initStaggerReveal, pageTransition } from '../../utils/animations';
 
 function Dashboard() {
   const [jobs, setJobs] = useState([]);
@@ -15,6 +16,11 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Initialize animations
+    pageTransition();
+    initScrollReveal();
+    initStaggerReveal();
+
     const fetchJobs = async () => {
       setLoading(true);
       setError("");

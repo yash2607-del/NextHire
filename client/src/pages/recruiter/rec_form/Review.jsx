@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
-import { getMyJobs } from '../../../api';
 import { getAuthToken } from '../../../utils/auth';
 import axios from 'axios';
 

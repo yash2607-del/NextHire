@@ -175,7 +175,7 @@ function Contact() {
         </div>
 
         {/* Right side - Contact Info Cards */}
-        <div className="contact-info-wrapper">\n          <div className="contact-info-header">
+        <div className="contact-info-wrapper">         <div className="contact-info-header">
             <h3 className="info-title">Connect With Us</h3>
             <p className="info-subtitle">Choose your preferred way to reach out</p>
           </div>
