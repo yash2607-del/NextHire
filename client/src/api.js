@@ -2,7 +2,11 @@ import axios from "axios";
 import { setupAxiosInterceptor } from "./utils/auth";
 
 // Use environment variable or fallback to localhost
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const rawApiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// Ensure base URL always ends with `/api` so client calls target the server routes
+const API_BASE_URL = rawApiUrl.endsWith("/api")
+  ? rawApiUrl
+  : rawApiUrl.replace(/\/+$/, "") + "/api";
 
 const API = axios.create({
   baseURL: API_BASE_URL,
