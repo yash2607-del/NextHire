@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecruiterForm } from "../../../context/RecruiterContext";
-import axios from "axios";
+import API from '../../../api';
 import { getAuthToken } from '../../../utils/auth';
 import './RecruiterForm.css';
 
@@ -72,9 +72,7 @@ function RecForm4() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/jobs", payload, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await API.post("/jobs", payload);
       setStatus(res.data.message || "Job posted successfully!");
       setTimeout(function() { navigate("/recruiter/form/review"); }, 800);
     } catch (err) {

@@ -2,7 +2,7 @@
 
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../api';
 import './Contact.css';
 
 function Contact() {
@@ -32,7 +32,7 @@ function Contact() {
     setSubmitting(true);
     
     try {
-      const response = await axios.post('http://localhost:8000/api/contact', formData);
+      const response = await API.post('/contact', formData);
       
       if (response.data.success) {
         setStatus('success');

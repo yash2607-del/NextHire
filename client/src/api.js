@@ -19,6 +19,35 @@ const API = axios.create({
 // Setup automatic token injection and 401 handling
 setupAxiosInterceptor(API);
 
+// Normalize backend error payloads into string messages so components
+// rendering `error` don't accidentally attempt to render objects.
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    try {
+      const data = error?.response?.data;
+      if (data) {
+        if (typeof data.error === 'object' && data.error !== null) {
+          const msg = data.error.message || JSON.stringify(data.error);
+          error.response.data.error = msg;
+          error.message = msg;
+        } else if (typeof data.message === 'object' && data.message !== null) {
+          const msg = data.message.message || JSON.stringify(data.message);
+          error.response.data.message = msg;
+          error.message = msg;
+        } else if (data.error) {
+          error.message = data.error;
+        } else if (data.message) {
+          error.message = data.message;
+        }
+      }
+    } catch (e) {
+      // swallow any normalization errors
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Auth endpoints
 // Server mounts auth routes at /api and defines POST /login and POST /user
 export const loginUser = (credentials) => API.post("/login", credentials);

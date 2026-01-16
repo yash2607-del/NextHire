@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../../api";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function JobApply() {
@@ -13,7 +13,7 @@ export default function JobApply() {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/jobs/${jobId}`);
+        const res = await API.get(`/jobs/${jobId}`);
         setJob(res.data);
       } catch (err) {
         setError(err.response?.data?.error || err.message);
@@ -37,9 +37,7 @@ export default function JobApply() {
         return;
       }
       const payload = { jobId, resumeUrl };
-      const res = await axios.post("http://localhost:8000/api/applications", payload, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await API.post("/applications", payload);
       alert(res.data.message || "Applied successfully");
       navigate("/applicant/applications");
     } catch (err) {

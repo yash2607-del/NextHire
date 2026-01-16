@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import API from "../../api";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -15,7 +15,7 @@ function JobDetails() {
       setLoading(true);
       setError("");
       try {
-        const res = await axios.get(`http://localhost:8000/api/jobs/${jobId}`);
+        const res = await API.get(`/jobs/${jobId}`);
         setJob(res.data);
       } catch (err) {
         setError(err.response?.data?.error || err.message);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
 import { getAuthToken } from '../../../utils/auth';
-import axios from 'axios';
+import API from '../../../api';
 
 
 function Review() {
@@ -17,9 +17,7 @@ function Review() {
       try {
         const token = getAuthToken();
         if (!token) throw new Error("Not logged in");
-        const res = await axios.get("http://localhost:8000/api/jobs/my", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await API.get("/jobs/my");
         if (Array.isArray(res.data) && res.data.length > 0) {
           setJobs(res.data);
         } else {

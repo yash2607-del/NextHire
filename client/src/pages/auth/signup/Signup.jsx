@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { registerUser } from '../../../api';
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -73,7 +73,7 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/user", payload);
+      const response = await registerUser(payload);
       toast.success(response.data.message);
       setTimeout(()=>{
         window.location.href='/login';

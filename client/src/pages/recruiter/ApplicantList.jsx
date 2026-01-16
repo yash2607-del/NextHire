@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from '../../api';
 import { getAuthToken } from '../../utils/auth';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -21,9 +21,8 @@ function ApplicantList() {
       setError("");
       try {
         const token = getAuthToken();
-        const res = await axios.get(`http://localhost:8000/api/applications/job/${jobId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        if (!token) throw new Error('Not authenticated');
+        const res = await API.get(`/applications/job/${jobId}`);
         setApplicants(res.data.applications || []);
       } catch (err) {
         setError(err.response?.data?.error || err.message);
@@ -36,10 +35,7 @@ function ApplicantList() {
 
   const handleStatusChange = async (applicationId, status) => {
     try {
-      const token = getAuthToken();
-      await axios.patch(`http://localhost:8000/api/applications/${applicationId}`, { status }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await API.patch(`/applications/${applicationId}`, { status });
       setApplicants((prev) => prev.map((a) => a._id === applicationId ? { ...a, status } : a));
     } catch (err) {
       alert(err.response?.data?.error || err.message);
