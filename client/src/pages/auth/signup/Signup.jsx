@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { registerUser } from '../../../api';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../login/Login.css";
@@ -8,6 +8,7 @@ import { pageTransition } from "../../../utils/animations";
 import { extractError } from '../../../lib/utils';
 
 function Signup() {
+  const navigate = useNavigate();
   const [role, setRole] = useState("Applicant");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -77,7 +78,7 @@ function Signup() {
       const response = await registerUser(payload);
       toast.success(response.data.message);
       setTimeout(()=>{
-        window.location.href='/login';
+        navigate('/login');
       },1500)
     } catch (error) {
       const msg = extractError(error) || "Signup failed";

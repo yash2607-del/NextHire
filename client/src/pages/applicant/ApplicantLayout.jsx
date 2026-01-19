@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./ApplicantLayout.css";
 
 const navLinks = [
@@ -11,6 +11,7 @@ const navLinks = [
 ];
 
 export default function ApplicantLayout() {
+  const navigate = useNavigate();
   return (
     <div className="layout-container">
       <nav className="modern-sidebar" aria-label="Applicant navigation">
@@ -39,7 +40,7 @@ export default function ApplicantLayout() {
             onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("user");
-              window.location.href = "/";
+              navigate("/");
             }}
             aria-label="Logout"
           >

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "../applicant/ApplicantLayout.css";
 
 const navLinks = [
@@ -10,6 +10,7 @@ const navLinks = [
 ];
 
 function RecruiterLayout() {
+  const navigate = useNavigate();
   return (
     <div className="layout-container">
       <nav className="modern-sidebar" aria-label="Recruiter navigation">
@@ -38,7 +39,7 @@ function RecruiterLayout() {
             onClick={() => {
               localStorage.removeItem("token");
               localStorage.removeItem("user");
-              window.location.href = "/";
+              navigate("/");
             }}
             aria-label="Logout"
           >

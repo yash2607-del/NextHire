@@ -75,20 +75,20 @@ app.use("/api", recruitRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/contact", contactRoutes);
 
-// Serve static files from the React app in production
-if (NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '../client/dist');
+// Serve the built React app (SPA) whenever it exists.
+// On Railway, NODE_ENV may not be set to 'production' by default, so we
+// gate this by presence of the build output instead of NODE_ENV.
+const clientBuildPath = path.join(__dirname, '../client/dist');
+if (fs.existsSync(clientBuildPath)) {
+  app.use(express.static(clientBuildPath));
 
-  // Only serve the built client if it exists (Railway backend-only deploy won't have it)
-  if (fs.existsSync(clientBuildPath)) {
-    app.use(express.static(clientBuildPath));
-
-    // Handle React routing - return index.html for any non-API routes
-    app.get('*', (req, res, next) => {
-      if (req.path.startsWith('/api')) return next();
-      return res.sendFile(path.join(clientBuildPath, 'index.html'));
-    });
-  }
+  // Handle React routing - return index.html for any non-API routes
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    return res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
+} else if (NODE_ENV === 'production') {
+  console.warn('⚠️ client/dist not found; SPA routes like /login will 404.');
 }
 
 // Health check endpoint
