@@ -2,22 +2,33 @@ import axios from "axios";
 import { setupAxiosInterceptor } from "./utils/auth";
 
 function resolveApiBaseUrl() {
-  const envUrl = import.meta.env.VITE_API_URL;
-  if (envUrl && typeof envUrl === 'string') {
-    const trimmed = envUrl.trim();
-    if (trimmed) return trimmed;
+  const raw = import.meta.env.VITE_API_URL;
+  if (raw && typeof raw === 'string') {
+    const trimmed = raw.trim();
+    if (trimmed) {
+      // If someone supplied just a hostname like "nexthire-production.up.railway.app",
+      // prepend https:// so axios treats it as an absolute URL instead of a path.
+      if (!/^https?:\/\//i.test(trimmed)) {
+        return `https://${trimmed}`;
+      }
+      return trimmed;
+    }
   }
 
   // If deployed as a single app (same origin), default to the current origin.
-  // This avoids accidentally calling localhost in production when VITE_API_URL isn't set.
   if (typeof window !== 'undefined' && window.location?.origin) {
     return window.location.origin;
   }
 
+  // Fallback to localhost for local dev/test
   return "http://localhost:5000";
 }
 
 const rawApiUrl = resolveApiBaseUrl();
+// Log the resolved API base in development to help debugging wrong configs
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
+  console.debug("Resolved API_BASE_URL:", rawApiUrl);
+}
 
 // Ensure base URL always ends with `/api` so client calls target the server routes
 const API_BASE_URL = rawApiUrl.endsWith("/api")
