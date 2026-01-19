@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from '../../api';
 import { getAuthToken } from '../../utils/auth';
+import { extractError } from '../../lib/utils';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import ApplicantCard from "../../components/ApplicantCard";
@@ -25,7 +26,7 @@ function ApplicantList() {
         const res = await API.get(`/applications/job/${jobId}`);
         setApplicants(res.data.applications || []);
       } catch (err) {
-        setError(err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }
@@ -38,7 +39,7 @@ function ApplicantList() {
       await API.patch(`/applications/${applicationId}`, { status });
       setApplicants((prev) => prev.map((a) => a._id === applicationId ? { ...a, status } : a));
     } catch (err) {
-      alert(err.response?.data?.error || err.message);
+      alert(extractError(err));
     }
   };
 

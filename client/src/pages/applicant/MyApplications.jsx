@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getUserApplications } from '../../api';
 import "./MyApplications.css";
 import { initScrollReveal, initStaggerReveal, pageTransition } from "../../utils/animations";
+import { extractError } from '../../lib/utils';
 
 export default function MyApplications() {
   const [apps, setApps] = useState([]);
@@ -29,7 +30,7 @@ export default function MyApplications() {
         setApps(appsData);
         setFilteredApps(appsData);
       } catch (err) {
-        setError(err.response?.data?.message || err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }

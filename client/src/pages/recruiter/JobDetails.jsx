@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../api";
+import { extractError } from '../../lib/utils';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -18,7 +19,7 @@ function JobDetails() {
         const res = await API.get(`/jobs/${jobId}`);
         setJob(res.data);
       } catch (err) {
-        setError(err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }

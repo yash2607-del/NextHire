@@ -1,17 +1,18 @@
 # Nixpacks configuration for Railway (monorepo)
-# This deploys the backend (Express) from /server.
+# This deploys the backend (Express) from /server and builds the Vite client.
 
 [phases.setup]
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
 cmds = [
-  "npm install --prefix server"
+  "npm install --prefix server",
+  "npm install --prefix client"
 ]
 
 [phases.build]
 cmds = [
-  "echo 'Skipping build: backend-only deploy on Railway'"
+  "npm run build --prefix client"
 ]
 
 [start]

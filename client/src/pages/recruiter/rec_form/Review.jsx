@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
+import { extractError } from '../../../lib/utils';
 import { getAuthToken } from '../../../utils/auth';
 import API from '../../../api';
 
@@ -24,7 +25,7 @@ function Review() {
           setJobs([]);
         }
       } catch (err) {
-        setError(err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }

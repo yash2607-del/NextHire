@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ApplicantProfile.css";
 import { initScrollReveal, initStaggerReveal, pageTransition } from "../../utils/animations";
 import { getUserProfile, getUserApplications } from "../../api";
+import { extractError } from '../../lib/utils';
 
 export default function ApplicantProfile() {
   const [user, setUser] = useState(null);
@@ -55,7 +56,7 @@ export default function ApplicantProfile() {
 
       } catch (err) {
         console.error("Error fetching profile:", err);
-        setError(err.response?.data?.error || "Failed to load profile");
+        setError(extractError(err) || "Failed to load profile");
       } finally {
         setLoading(false);
       }

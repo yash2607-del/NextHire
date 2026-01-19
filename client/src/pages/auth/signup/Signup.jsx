@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../login/Login.css";
 import { pageTransition } from "../../../utils/animations";
+import { extractError } from '../../../lib/utils';
 
 function Signup() {
   const [role, setRole] = useState("Applicant");
@@ -79,7 +80,7 @@ function Signup() {
         window.location.href='/login';
       },1500)
     } catch (error) {
-      const msg = error.response?.data?.error || "Signup failed";
+      const msg = extractError(error) || "Signup failed";
       setError(msg);
       toast.error(msg);
     } finally {

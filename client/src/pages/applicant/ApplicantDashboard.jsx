@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import JobDetailModal from '../../components/JobDetailModal';
 import "./ApplicantDashboard.css";
 import { initScrollReveal, initStaggerReveal, pageTransition } from '../../utils/animations';
+import { extractError } from '../../lib/utils';
 
 function ApplicantDashboard() {
   const [jobs, setJobs] = useState([]);
@@ -45,7 +46,7 @@ function ApplicantDashboard() {
         setJobs(recentJobs);
         setFilteredJobs(recentJobs);
       } catch (err) {
-        setError(err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }

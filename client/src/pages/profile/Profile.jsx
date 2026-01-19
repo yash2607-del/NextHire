@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAuthToken } from '../../utils/auth';
 import { getUserProfile } from '../../api';
+import { extractError } from '../../lib/utils';
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -19,7 +20,7 @@ function Profile() {
         setProfile(res.data);
       } catch (err) {
         console.error('Profile fetch error:', err);
-        setError(err.response?.data?.error || 'Failed to load profile');
+        setError(extractError(err) || 'Failed to load profile');
       } finally { setLoading(false); }
     };
     fetchProfile();

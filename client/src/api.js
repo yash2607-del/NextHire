@@ -1,8 +1,24 @@
 import axios from "axios";
 import { setupAxiosInterceptor } from "./utils/auth";
 
-// Use environment variable or fallback to localhost
-const rawApiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+function resolveApiBaseUrl() {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && typeof envUrl === 'string') {
+    const trimmed = envUrl.trim();
+    if (trimmed) return trimmed;
+  }
+
+  // If deployed as a single app (same origin), default to the current origin.
+  // This avoids accidentally calling localhost in production when VITE_API_URL isn't set.
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin;
+  }
+
+  return "http://localhost:5000";
+}
+
+const rawApiUrl = resolveApiBaseUrl();
+
 // Ensure base URL always ends with `/api` so client calls target the server routes
 const API_BASE_URL = rawApiUrl.endsWith("/api")
   ? rawApiUrl

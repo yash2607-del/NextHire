@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../../api";
+import { extractError } from '../../lib/utils';
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function JobApply() {
@@ -16,7 +17,7 @@ export default function JobApply() {
         const res = await API.get(`/jobs/${jobId}`);
         setJob(res.data);
       } catch (err) {
-        setError(err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }
@@ -41,7 +42,7 @@ export default function JobApply() {
       alert(res.data.message || "Applied successfully");
       navigate("/applicant/applications");
     } catch (err) {
-      alert(err.response?.data?.error || err.message);
+      alert(extractError(err));
     }
   };
 

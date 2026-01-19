@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { getRecruiterJobs, deleteJob } from '../../api';
 import { initScrollReveal, initStaggerReveal, pageTransition } from '../../utils/animations';
+import { extractError } from '../../lib/utils';
 
 function Dashboard() {
   const [jobs, setJobs] = useState([]);
@@ -32,7 +33,7 @@ function Dashboard() {
         setJobs(data);
         setFilteredJobs(data);
       } catch (err) {
-        setError(err.response?.data?.error || err.message);
+        setError(extractError(err));
       } finally {
         setLoading(false);
       }
@@ -83,7 +84,7 @@ function Dashboard() {
       setJobs(jobs.filter((job) => job._id !== jobId));
       setStatusMsg("Job deleted successfully.");
     } catch (err) {
-      setStatusMsg(err.response?.data?.error || err.message);
+      setStatusMsg(extractError(err));
     } finally {
       setDeleting("");
     }
