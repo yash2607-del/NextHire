@@ -1,7 +1,7 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Forgot from "./pages/auth/forgot/Forgot";
 import Newpass from "./pages/auth/newpass/Newpass";
 import Login from "./pages/auth/login/Login";
@@ -34,7 +34,7 @@ import Settings from "./pages/settings/Settings";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <A11yProvider>
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <main id="main-content" tabIndex={-1} role="main">
@@ -79,7 +79,7 @@ function App() {
         </main>
         <AccessibilityPanel />
         </A11yProvider>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }

@@ -45,13 +45,23 @@ function Login() {
     } catch (error) {
       console.error("Login error:", error);
       const apiData = error?.response?.data;
-      const errorMsg =
-        (typeof apiData?.error === "string" && apiData.error) ||
-        (typeof apiData?.message === "string" && apiData.message) ||
-        (typeof error?.message === "string" && error.message) ||
-        "An error occurred. Please try again.";
-      setError(errorMsg);
-      toast.error(errorMsg);
+
+      // Prefer string messages, but safely extract when backend sends { code, message } objects
+      let errorMsg = "An error occurred. Please try again.";
+
+      if (apiData) {
+        if (typeof apiData.error === "string") errorMsg = apiData.error;
+        else if (typeof apiData.message === "string") errorMsg = apiData.message;
+        else if (apiData.error && typeof apiData.error.message === "string") errorMsg = apiData.error.message;
+        else if (apiData.message && typeof apiData.message.message === "string") errorMsg = apiData.message.message;
+      }
+
+      if (!errorMsg && typeof error?.message === "string") errorMsg = error.message;
+
+      // Ensure we always store a string to avoid React trying to render objects
+      const errorStr = String(errorMsg);
+      setError(errorStr);
+      toast.error(errorStr);
     } finally {
       setLoading(false);
     }
@@ -82,7 +92,7 @@ function Login() {
                     <path d="M12 8V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     <path d="M12 16H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
-                  {error}
+                  {typeof error === 'string' ? error : JSON.stringify(error)}
                 </div>
               )}
 
