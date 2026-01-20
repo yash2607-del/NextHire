@@ -23,23 +23,24 @@ const PORT = process.env.PORT || 5000;
 const MONGOURL = process.env.MONGO_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
 const NODE_ENV = process.env.NODE_ENV || 'development';
+const CORS_ORIGIN = process.env.CORS_ORIGIN || "https://nexthire-snowy.vercel.app";
 
-// CORS Configuration
-// To unblock the deployed Vercel frontend and any other hosts,
-// we reflect the request origin instead of maintaining a manual allow-list.
-// If you later want to lock this down, switch `origin: true` to an array
-// or a custom function that only allows specific domains.
+// CORS Configuration - allow your Vercel frontend
 const corsOptions = {
-  origin: true, // reflect request origin
+  origin: CORS_ORIGIN,
   credentials: true,
   optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
+// Must be registered before routes
 app.use(cors(corsOptions));
-// Make sure preflight requests always get a CORS response
-app.options('*', cors(corsOptions));
+// Ensure preflight (OPTIONS) requests get proper CORS headers
+app.options("*", cors(corsOptions));
+
+// Body parsing
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
