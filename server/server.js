@@ -23,31 +23,14 @@ const PORT = process.env.PORT || 5000;
 const MONGOURL = process.env.MONGO_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
 const NODE_ENV = process.env.NODE_ENV || 'development';
-const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
 
-// CORS Configuration - More secure for production
+// CORS Configuration
+// To unblock the deployed Vercel frontend and any other hosts,
+// we reflect the request origin instead of maintaining a manual allow-list.
+// If you later want to lock this down, switch `origin: true` to an array
+// or a custom function that only allows specific domains.
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
-    if (!origin) return callback(null, true);
-    
-    // In development, allow all origins for easier local testing.
-    if (NODE_ENV === 'development') return callback(null, true);
-
-    const allowedOrigins = CORS_ORIGIN
-      .split(',')
-      .map(o => o.trim())
-      .filter(Boolean);
-
-    // Allow exact matches configured via CORS_ORIGIN
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-
-    // Allow all Vercel preview/prod deployments for this app.
-    // If you want to restrict further, set CORS_ORIGIN to your exact domain(s).
-    if (/\.vercel\.app$/i.test(origin)) return callback(null, true);
-
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: true, // reflect request origin
   credentials: true,
   optionsSuccessStatus: 200,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

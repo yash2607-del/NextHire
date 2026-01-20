@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: nexthire-server
+    env: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        # Comma-separated list of allowed origins. The server also allows *.vercel.app.
+        value: https://your-vercel-domain.vercel.app
+      - key: JWT_SECRET
+        sync: false
+      - key: MONGO_URL
+        sync: false
