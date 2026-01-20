@@ -31,19 +31,32 @@ const corsOptions = {
     // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     
-    const allowedOrigins = CORS_ORIGIN.split(',').map(o => o.trim());
-    
-    if (allowedOrigins.indexOf(origin) !== -1 || NODE_ENV === 'development') {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    // In development, allow all origins for easier local testing.
+    if (NODE_ENV === 'development') return callback(null, true);
+
+    const allowedOrigins = CORS_ORIGIN
+      .split(',')
+      .map(o => o.trim())
+      .filter(Boolean);
+
+    // Allow exact matches configured via CORS_ORIGIN
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    // Allow all Vercel preview/prod deployments for this app.
+    // If you want to restrict further, set CORS_ORIGIN to your exact domain(s).
+    if (/\.vercel\.app$/i.test(origin)) return callback(null, true);
+
+    return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
+// Make sure preflight requests always get a CORS response
+app.options('*', cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -71,13 +84,15 @@ mongoose.connect(MONGOURL)
   });
 
 app.use("/api", authRoutes);
+// Backwards-compatible auth routes (so clients calling /login still work)
+app.use("/", authRoutes);
 app.use("/api", recruitRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/contact", contactRoutes);
 
 // Serve the built React app (SPA) whenever it exists.
-// On Railway, NODE_ENV may not be set to 'production' by default, so we
-// gate this by presence of the build output instead of NODE_ENV.
+// Some hosts may not set NODE_ENV='production', so we gate this by
+// presence of the build output instead of NODE_ENV.
 const clientBuildPath = path.join(__dirname, '../client/dist');
 if (fs.existsSync(clientBuildPath)) {
   app.use(express.static(clientBuildPath));

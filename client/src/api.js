@@ -1,18 +1,26 @@
 import axios from "axios";
 import { setupAxiosInterceptor } from "./utils/auth";
 
+// Canonical hosted backend (Render). Prefer overriding via VITE_API_URL.
+const DEFAULT_PROD_API_ORIGIN = "https://nexthire-hfj1.onrender.com";
+
 function resolveApiBaseUrl() {
   const raw = import.meta.env.VITE_API_URL;
   if (raw && typeof raw === 'string') {
     const trimmed = raw.trim();
     if (trimmed) {
-      // If someone supplied just a hostname like "nexthire-production.up.railway.app",
+      // If someone supplied just a hostname like "example.com",
       // prepend https:// so axios treats it as an absolute URL instead of a path.
       if (!/^https?:\/\//i.test(trimmed)) {
         return `https://${trimmed}`;
       }
       return trimmed;
     }
+  }
+
+  // In production, default to the hosted backend.
+  if (import.meta.env.PROD) {
+    return DEFAULT_PROD_API_ORIGIN;
   }
 
   // If deployed as a single app (same origin), default to the current origin.

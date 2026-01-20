@@ -113,9 +113,16 @@ Required:
 
 ```
 MONGO_URL=your_mongodb_connection_string
-PORT=8000
+PORT=5000
 JWT_SECRET=your_secure_jwt_secret
 ```
+
+### Frontend (Vite) env
+
+The frontend reads the backend base URL from `VITE_API_URL` (the client app automatically appends `/api`).
+
+- Production is configured in `client/.env.production` to use your Render backend: `https://nexthire-hfj1.onrender.com`
+- Development is configured in `client/.env.development` to use `http://localhost:5000`
 
 Optional:
 
