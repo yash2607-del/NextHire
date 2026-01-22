@@ -140,8 +140,16 @@ app.use("/api", authRoutes);
 // Backwards-compatible auth routes (so clients calling /login still work)
 app.use("/", authRoutes);
 app.use("/api", recruitRoutes);
+// Backwards-compatible recruiter/job routes (some deployments call /jobs without /api)
+app.use("/", recruitRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/contact", contactRoutes);
+
+// Backwards-compatible jobs endpoints (older clients may call /jobs without /api)
+// 307 preserves method/body for POST/DELETE/PATCH.
+app.use("/jobs", (req, res) => {
+  return res.redirect(307, `/api${req.originalUrl}`);
+});
 
 // Serve the built React app (SPA) whenever it exists.
 // Some hosts may not set NODE_ENV='production', so we gate this by
@@ -168,8 +176,12 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Profile endpoint (should be moved to a separate route file later)
-app.get("/api/profile", async (req, res) => {
+// Backwards-compatible health endpoint (older clients may call /health)
+app.get("/health", (req, res) => {
+  res.redirect(307, "/api/health");
+});
+
+async function handleProfile(req, res) {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ error: "Unauthorized" });
 
@@ -215,7 +227,12 @@ app.get("/api/profile", async (req, res) => {
     console.error("Profile fetch error:", err.message);
     res.status(401).json({ error: "Invalid token" });
   }
-});
+}
+
+// Profile endpoint (should be moved to a separate route file later)
+app.get("/api/profile", handleProfile);
+// Backwards-compatible profile endpoint (older clients may call /profile)
+app.get("/profile", handleProfile);
 
 // Global error handler
 app.use((err, req, res, next) => {
