@@ -25,9 +25,51 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "https://nexthire-snowy.vercel.app";
 
-// CORS Configuration - allow your Vercel frontend
+// Normalize CORS origins: support comma-separated env var and common dev/preview hosts
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://nexthire-snowy.vercel.app",
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:5000",
+];
+
+const envOrigins = CORS_ORIGIN
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+const ALLOWED_ORIGINS = Array.from(new Set([...DEFAULT_ALLOWED_ORIGINS, ...envOrigins]));
+
+function isOriginAllowed(origin) {
+  if (!origin) return true; // non-browser or same-origin requests
+
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+
+  try {
+    const { hostname } = new URL(origin);
+
+    // Allow localhost variants
+    if (hostname === "localhost" || hostname === "127.0.0.1") return true;
+
+    // Allow any Vercel preview/production URL
+    if (hostname.endsWith(".vercel.app")) return true;
+  } catch (e) {
+    console.warn("Invalid Origin header received:", origin);
+  }
+
+  return false;
+}
+
+// CORS Configuration - allow your Vercel frontend and safe dev origins
 const corsOptions = {
-  origin: CORS_ORIGIN,
+  origin: (origin, callback) => {
+    if (isOriginAllowed(origin)) {
+      return callback(null, true);
+    }
+
+    console.warn("❌ Blocked CORS origin:", origin);
+    return callback(null, false);
+  },
   credentials: true,
   optionsSuccessStatus: 200,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -52,7 +94,7 @@ if (!JWT_SECRET || !MONGOURL) {
 
 console.log(`🚀 Starting NextHire Server...`);
 console.log(`📝 Environment: ${NODE_ENV}`);
-console.log(`🔒 CORS Origin: ${CORS_ORIGIN}`);
+console.log("🔒 Allowed CORS origins:", ALLOWED_ORIGINS);
 
 mongoose.connect(MONGOURL)
   .then(() => {
