@@ -2,7 +2,7 @@ import axios from "axios";
 import { setupAxiosInterceptor } from "./utils/auth";
 
 // Canonical hosted backend (Render). Prefer overriding via VITE_API_URL.
-const DEFAULT_PROD_API_ORIGIN = "https://nexthire-hfj1.onrender.com";
+const DEFAULT_PROD_API_ORIGIN = "https://mynexthire.onrender.com";
 
 function resolveApiBaseUrl() {
   const raw = import.meta.env.VITE_API_URL;
@@ -23,12 +23,8 @@ function resolveApiBaseUrl() {
     return DEFAULT_PROD_API_ORIGIN;
   }
 
-  // If deployed as a single app (same origin), default to the current origin.
-  if (typeof window !== 'undefined' && window.location?.origin) {
-    return window.location.origin;
-  }
-
-  // Fallback to localhost for local dev/test
+  // In dev, default to local backend. If you're running the API on a different
+  // port/host, set VITE_API_URL (e.g. http://localhost:8000).
   return "http://localhost:5000";
 }
 

@@ -8,13 +8,13 @@
 
 /* Header Section */
 .profile-header {
-  background: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
+  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
   padding: 60px 40px;
-  border-radius: 24px;
+  border-radius: var(--radius-xl, 24px);
   margin-bottom: 32px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(48, 107, 172, 0.2);
+  box-shadow: 0 20px 60px rgba(37, 99, 235, 0.2);
 }
 
 .profile-header::before {
@@ -124,7 +124,7 @@
 
 .profile-btn-primary {
   background: white;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -167,7 +167,7 @@
 .stat-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
-  border-color: #306BAC;
+  border-color: var(--color-primary, #2563EB);
 }
 
 .stat-icon {
@@ -181,8 +181,8 @@
 }
 
 .stat-icon.blue {
-  background: linear-gradient(135deg, rgba(48, 107, 172, 0.15) 0%, rgba(43, 139, 176, 0.1) 100%);
-  color: #306BAC;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+  color: var(--color-primary, #2563EB);
 }
 
 .stat-icon.green {
@@ -257,13 +257,13 @@
 .section-title-icon {
   width: 24px;
   height: 24px;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
 }
 
 .section-action {
   background: none;
   border: none;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -273,7 +273,7 @@
 }
 
 .section-action:hover {
-  background: #EAF2F8;
+  background: var(--color-primary-50, #EAF2F8);
 }
 
 /* About Section */
@@ -292,23 +292,23 @@
 }
 
 .skill-tag {
-  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
-  border: 2px solid #E0E7FF;
-  color: #306BAC;
+  background: linear-gradient(135deg, #F8FAFC 0%, var(--color-primary-50, #EFF6FF) 100%);
+  border: 2px solid var(--color-primary-200, #E0E7FF);
+  color: var(--color-primary, #2563EB);
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg, 12px);
   font-size: 14px;
   font-weight: 600;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal, 0.3s ease);
   cursor: default;
 }
 
 .skill-tag:hover {
-  background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
-  border-color: #306BAC;
+  background: linear-gradient(135deg, var(--color-primary-50, #EFF6FF) 0%, var(--color-primary-100, #DBEAFE) 100%);
+  border-color: var(--color-primary, #2563EB);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(48, 107, 172, 0.15);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
 }
 
 /* Experience Timeline */
@@ -324,7 +324,7 @@
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background: linear-gradient(180deg, #306BAC 0%, #E2E8F0 100%);
+  background: linear-gradient(180deg, var(--color-primary, #2563EB) 0%, #E2E8F0 100%);
 }
 
 .experience-item {
@@ -344,9 +344,9 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #306BAC;
+  background: var(--color-primary, #2563EB);
   border: 3px solid white;
-  box-shadow: 0 0 0 2px #306BAC;
+  box-shadow: 0 0 0 2px var(--color-primary, #2563EB);
 }
 
 .experience-header {
@@ -362,7 +362,7 @@
 
 .experience-company {
   font-size: 15px;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   font-weight: 600;
   margin: 0;
 }
@@ -387,9 +387,9 @@
 .education-item {
   padding: 20px;
   background: #F8FAFC;
-  border-radius: 12px;
+  border-radius: var(--radius-lg, 12px);
   margin-bottom: 16px;
-  border-left: 4px solid #306BAC;
+  border-left: 4px solid var(--color-primary, #2563EB);
 }
 
 .education-item:last-child {
@@ -405,7 +405,7 @@
 
 .education-school {
   font-size: 14px;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   font-weight: 600;
   margin: 0 0 8px 0;
 }
@@ -440,12 +440,12 @@
 .contact-info-icon {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, rgba(48, 107, 172, 0.1) 0%, rgba(43, 139, 176, 0.05) 100%);
+  border-radius: var(--radius-md, 10px);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   flex-shrink: 0;
 }
 
@@ -582,9 +582,9 @@
 .loading-spinner {
   width: 48px;
   height: 48px;
-  border: 4px solid rgba(48, 107, 172, 0.1);
+  border: 4px solid rgba(37, 99, 235, 0.1);
   border-radius: 50%;
-  border-top-color: #306BAC;
+  border-top-color: var(--color-primary, #2563EB);
   animation: spin 1s linear infinite;
 }
 

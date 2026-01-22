@@ -1,86 +1,114 @@
+/* Signup Page - Premium SaaS Design */
 .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    padding-top: 100px; 
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--space-8, 2rem) var(--space-4, 1rem);
+  background: var(--gradient-hero, linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F8FAFC 100%));
+  position: relative;
+}
 
+.wrapper::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
 
-  .google-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    color: rgb(37, 29, 29);
-    border: 2px solid rgb(0, 187, 255);
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .google-btn:hover {
-    background-color: #bed4f2;
-  }
-  
-  .google-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-  
-  .google-text {
-    font-size: 16px;
-  }
-  
-  .google-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .linkedin-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    color: rgb(37, 29, 29);
-    border: 2px solid rgb(0, 119, 181);
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .linkedin-btn:hover {
-    background-color: #cce7f2;
-  }
-  
-  .linkedin-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-  
-  .linkedin-text {
-    font-size: 16px;
-  }
-  
-  .linkedin-button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+.google-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-elevated, #FFFFFF);
+  color: var(--color-text-primary, #0F172A);
+  border: 2px solid var(--color-border-medium, #CBD5E1);
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--font-size-sm, 0.875rem);
+  transition: all 0.2s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
 
-  .sign-in{
-    text-decoration: none;
-    color: rgb(61, 110, 209);
-    font-weight: bold;
-    
-  }
+.google-btn:hover {
+  background-color: var(--color-bg-secondary, #F1F5F9);
+  border-color: var(--color-border-strong, #94A3B8);
+  transform: translateY(-1px);
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: var(--space-3, 0.75rem);
+}
+
+.google-text {
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.google-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.linkedin-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-elevated, #FFFFFF);
+  color: var(--color-text-primary, #0F172A);
+  border: 2px solid #0077B5;
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--font-size-sm, 0.875rem);
+  transition: all 0.2s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.linkedin-btn:hover {
+  background-color: rgba(0, 119, 181, 0.05);
+  border-color: #005885;
+  transform: translateY(-1px);
+}
+
+.linkedin-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: var(--space-3, 0.75rem);
+}
+
+.linkedin-text {
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.linkedin-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in {
+  text-decoration: none;
+  color: var(--color-primary, #2563EB);
+  font-weight: var(--font-weight-semibold, 600);
+  transition: color 0.2s ease;
+}
+
+.sign-in:hover {
+  color: var(--color-primary-hover, #1D4ED8);
+  text-decoration: underline;
+}
 
 
   

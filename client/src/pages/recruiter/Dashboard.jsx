@@ -248,7 +248,7 @@ function Dashboard() {
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'translateY(-4px)';
-                          e.currentTarget.style.boxShadow = '0 12px 24px rgba(14, 165, 233, 0.15)';
+                          e.currentTarget.style.boxShadow = '0 12px 24px rgba(37, 99, 235, 0.15)';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'translateY(0)';
@@ -263,7 +263,7 @@ function Dashboard() {
                                   width: 40, 
                                   height: 40, 
                                   borderRadius: 10, 
-                                  background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)',
+                                  background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)',
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center'
@@ -277,7 +277,7 @@ function Dashboard() {
                                   <h5 className="card-title mb-0" style={{ color: '#0f172a', fontWeight: 600, fontSize: '1.1rem' }}>{job.title}</h5>
                                   <p className="mb-0 text-muted d-flex align-items-center gap-1" style={{ fontSize: 14 }}>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z\" stroke="currentColor" strokeWidth="2"/>
+                                      <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" strokeWidth="2"/>
                                       <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
                                     </svg>
                                     {job.location || 'Remote'}
@@ -300,24 +300,24 @@ function Dashboard() {
                           </div>
                           
                           <div style={{
-                            background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+                            background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
                             padding: '1rem',
                             borderRadius: 12,
                             marginBottom: '1rem',
-                            border: '1px solid #bae6fd'
+                            border: '1px solid #BFDBFE'
                           }}>
                             <div className="d-flex align-items-center gap-2">
                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#0284c7" strokeWidth="2"/>
-                                <circle cx="9" cy="7" r="4" stroke="#0284c7" strokeWidth="2"/>
-                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="#0284c7" strokeWidth="2"/>
-                                <path d="M17 3.13C17.8604 3.35031 18.623 3.85071 19.1676 4.55232C19.7122 5.25392 20.0078 6.11683 20.0078 7.005C20.0078 7.89318 19.7122 8.75608 19.1676 9.45769C18.623 10.1593 17.8604 10.6597 17 10.88" stroke="#0284c7" strokeWidth="2"/>
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#1D4ED8" strokeWidth="2"/>
+                                <circle cx="9" cy="7" r="4" stroke="#1D4ED8" strokeWidth="2"/>
+                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="#1D4ED8" strokeWidth="2"/>
+                                <path d="M17 3.13C17.8604 3.35031 18.623 3.85071 19.1676 4.55232C19.7122 5.25392 20.0078 6.11683 20.0078 7.005C20.0078 7.89318 19.7122 8.75608 19.1676 9.45769C18.623 10.1593 17.8604 10.6597 17 10.88" stroke="#1D4ED8" strokeWidth="2"/>
                               </svg>
                               <div>
-                                <p className="mb-0" style={{ fontSize: 14, color: '#0369a1', fontWeight: 600 }}>
+                                <p className="mb-0" style={{ fontSize: 14, color: '#1D4ED8', fontWeight: 600 }}>
                                   {Array.isArray(job.applications) ? job.applications.length : 0} Applicants
                                 </p>
-                                <p className="mb-0" style={{ fontSize: 12, color: '#0891b2' }}>
+                                <p className="mb-0" style={{ fontSize: 12, color: '#3B82F6' }}>
                                   {Array.isArray(job.applications) && job.applications.length > 0 ? 'Review applications' : 'Waiting for applicants'}
                                 </p>
                               </div>
@@ -328,19 +328,19 @@ function Dashboard() {
                             <button 
                               className="btn btn-sm flex-grow-1" 
                               style={{ 
-                                background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)', 
+                                background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)', 
                                 border: 'none',
                                 color: 'white',
                                 fontWeight: 600,
                                 borderRadius: 10,
                                 padding: '0.5rem 1rem',
-                                boxShadow: '0 4px 12px rgba(14, 165, 233, 0.2)'
+                                boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)'
                               }} 
                               onClick={() => handleViewApplicants(job._id)} 
                               aria-label={`View applicants for ${job.title}`}
                             >
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '6px', verticalAlign: 'middle'}}>
-                                <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z\" stroke="currentColor" strokeWidth="2"/>
+                                <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" strokeWidth="2"/>
                                 <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
                               </svg>
                               View Applicants
@@ -361,7 +361,7 @@ function Dashboard() {
                             >
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginRight: '6px', verticalAlign: 'middle'}}>
                                 <path d="M3 6H5H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                                <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z\" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                                <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                               </svg>
                               {deleting === job._id ? 'Deleting...' : 'Delete'}
                             </button>

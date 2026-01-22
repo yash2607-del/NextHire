@@ -34,13 +34,13 @@
 .applications-icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
-  border-radius: 16px;
+  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  border-radius: var(--radius-lg, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 8px 24px rgba(48, 107, 172, 0.25);
+  box-shadow: var(--shadow-primary, 0 8px 24px rgba(37, 99, 235, 0.25));
 }
 
 .applications-title-text h1 {
@@ -78,22 +78,22 @@
 }
 
 .filter-button:hover {
-  border-color: #306BAC;
-  color: #306BAC;
-  background: #EFF6FF;
+  border-color: var(--color-primary, #2563EB);
+  color: var(--color-primary, #2563EB);
+  background: var(--color-primary-50, #EFF6FF);
 }
 
 .filter-button.active {
-  background: #306BAC;
+  background: var(--color-primary, #2563EB);
   color: white;
-  border-color: #306BAC;
+  border-color: var(--color-primary, #2563EB);
 }
 
 .export-button {
   padding: 12px 20px;
-  background: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
+  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg, 12px);
   color: white;
   font-size: 14px;
   font-weight: 600;
@@ -101,13 +101,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(48, 107, 172, 0.25);
+  transition: all var(--transition-normal, 0.3s ease);
+  box-shadow: var(--shadow-primary, 0 4px 12px rgba(37, 99, 235, 0.25));
 }
 
 .export-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(48, 107, 172, 0.35);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
 }
 
 /* Filter Bar */
@@ -131,15 +131,15 @@
 }
 
 .filter-chip:hover {
-  border-color: #306BAC;
-  background: #EFF6FF;
-  color: #306BAC;
+  border-color: var(--color-primary, #2563EB);
+  background: var(--color-primary-50, #EFF6FF);
+  color: var(--color-primary, #2563EB);
 }
 
 .filter-chip.active {
-  background: #306BAC;
+  background: var(--color-primary, #2563EB);
   color: white;
-  border-color: #306BAC;
+  border-color: var(--color-primary, #2563EB);
 }
 
 /* Loading State */
@@ -156,7 +156,7 @@
   width: 64px;
   height: 64px;
   border: 4px solid #E2E8F0;
-  border-top-color: #306BAC;
+  border-top-color: var(--color-primary, #2563EB);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -237,9 +237,9 @@
 
 .empty-action {
   padding: 14px 28px;
-  background: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
+  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg, 12px);
   color: white;
   font-size: 15px;
   font-weight: 600;
@@ -247,13 +247,13 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(48, 107, 172, 0.25);
+  transition: all var(--transition-normal, 0.3s ease);
+  box-shadow: var(--shadow-primary, 0 4px 12px rgba(37, 99, 235, 0.25));
 }
 
 .empty-action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(48, 107, 172, 0.35);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
 }
 
 /* Applications Grid */
@@ -282,15 +282,15 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #306BAC 0%, #2B8BB0 100%);
+  background: var(--gradient-primary, linear-gradient(90deg, #2563EB 0%, #3B82F6 100%));
   transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal, 0.3s ease);
   transform-origin: left;
 }
 
 .application-card:hover {
-  border-color: #306BAC;
-  box-shadow: 0 12px 40px rgba(48, 107, 172, 0.15);
+  border-color: var(--color-primary, #2563EB);
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
   transform: translateY(-4px);
 }
 
@@ -310,15 +310,15 @@
 .application-logo {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+  background: linear-gradient(135deg, #F8FAFC 0%, var(--color-primary-50, #EFF6FF) 100%);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   font-weight: 700;
-  color: #306BAC;
-  border: 2px solid #E0E7FF;
+  color: var(--color-primary, #2563EB);
+  border: 2px solid var(--color-primary-200, #E0E7FF);
   flex-shrink: 0;
 }
 
@@ -454,9 +454,9 @@
 
 .skill-badge {
   padding: 6px 12px;
-  background: #EFF6FF;
-  border: 1px solid #DBEAFE;
-  color: #306BAC;
+  background: var(--color-primary-50, #EFF6FF);
+  border: 1px solid var(--color-primary-100, #DBEAFE);
+  color: var(--color-primary, #2563EB);
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
@@ -500,9 +500,9 @@
 }
 
 .action-button:hover {
-  border-color: #306BAC;
-  color: #306BAC;
-  background: #EFF6FF;
+  border-color: var(--color-primary, #2563EB);
+  color: var(--color-primary, #2563EB);
+  background: var(--color-primary-50, #EFF6FF);
   transform: translateY(-2px);
 }
 

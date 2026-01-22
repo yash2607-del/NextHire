@@ -143,6 +143,8 @@ app.use("/api", recruitRoutes);
 // Backwards-compatible recruiter/job routes (some deployments call /jobs without /api)
 app.use("/", recruitRoutes);
 app.use("/api/applications", applicationRoutes);
+// Backwards-compatible applications routes (older clients may call /applications without /api)
+app.use("/applications", applicationRoutes);
 app.use("/api/contact", contactRoutes);
 
 // Backwards-compatible jobs endpoints (older clients may call /jobs without /api)

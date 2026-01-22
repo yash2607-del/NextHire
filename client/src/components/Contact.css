@@ -21,7 +21,7 @@
 .shape {
   position: absolute;
   border-radius: 50%;
-  background: rgba(48, 107, 172, 0.03);
+  background: rgba(37, 99, 235, 0.03);
   backdrop-filter: blur(40px);
 }
 
@@ -177,8 +177,8 @@
 
 .form-input:focus {
   background: #ffffff;
-  border-color: #306BAC;
-  box-shadow: 0 0 0 4px rgba(48, 107, 172, 0.1);
+  border-color: var(--color-primary, #2563EB);
+  box-shadow: var(--focus-ring, 0 0 0 4px rgba(37, 99, 235, 0.1));
   transform: translateY(-2px);
 }
 
@@ -191,25 +191,25 @@
 .submit-button {
   width: 100%;
   padding: 18px 32px;
-  background: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
+  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
   border: none;
-  border-radius: 14px;
+  border-radius: var(--radius-lg, 14px);
   color: #ffffff;
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal, 0.3s ease);
   margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 0 8px 24px rgba(48, 107, 172, 0.3);
+  box-shadow: var(--shadow-primary, 0 8px 24px rgba(37, 99, 235, 0.3));
 }
 
 .submit-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(48, 107, 172, 0.4);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.4);
 }
 
 .submit-button:active {
@@ -282,9 +282,9 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(48, 107, 172, 0.05) 0%, rgba(43, 139, 176, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal, 0.3s ease);
 }
 
 .contact-info-card:hover::before {
@@ -293,21 +293,21 @@
 
 .contact-info-card:hover {
   background: #ffffff;
-  border-color: #306BAC;
+  border-color: var(--color-primary, #2563EB);
   transform: translateX(8px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(48, 107, 172, 0.15);
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
 }
 
 .contact-icon {
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
-  border-radius: 16px;
+  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  border-radius: var(--radius-lg, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal, 0.3s ease);
   position: relative;
   z-index: 1;
 }
@@ -358,10 +358,10 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   font-size: 1.5rem;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal, 0.3s ease);
 }
 
 .contact-info-card:hover .link-arrow {
@@ -389,7 +389,7 @@
 .stat-value {
   font-size: 2rem;
   font-weight: 800;
-  color: #306BAC;
+  color: var(--color-primary, #2563EB);
   line-height: 1;
   margin-bottom: 8px;
 }

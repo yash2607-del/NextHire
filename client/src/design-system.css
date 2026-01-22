@@ -1,27 +1,43 @@
 /* ========================================
-   NEXTHIRE DESIGN SYSTEM
-   Modern SaaS UI inspired by LinkedIn Talent, Lever, Greenhouse
+   NEXTHIRE DESIGN SYSTEM v2.0
+   Premium SaaS UI - Unified & Consistent
+   Inspired by: Linear, Vercel, Stripe, Notion
    ======================================== */
 
 :root {
-  /* === COLOR PALETTE === */
-  /* Primary Brand Colors */
-  --color-primary: #306BAC; /* New brand color */
-  --color-primary-hover: #27598F; /* Slightly darker for hover */
-  --color-primary-light: #EAF2F8; /* Soft light background derived from primary */
-  --color-primary-50: #F0F5FA;
+  /* === BRAND COLORS - UNIFIED BLUE PALETTE === */
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-dark: #1E40AF;
+  --color-primary-light: #EFF6FF;
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-primary-200: #BFDBFE;
+  --color-primary-500: #3B82F6;
+  --color-primary-600: #2563EB;
+  --color-primary-700: #1D4ED8;
   
   /* Secondary & Accent */
-  --color-secondary: #00B8D4;
-  --color-accent: #7C3AED;
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
-  --color-info: #3B82F6;
+  --color-secondary: #8B5CF6;
+  --color-secondary-light: #EDE9FE;
+  --color-accent: #F59E0B;
+  --color-accent-light: #FEF3C7;
   
-  /* Neutrals */
-  --color-bg-base: #FAFBFC;
+  /* Semantic Colors */
+  --color-success: #10B981;
+  --color-success-light: #D1FAE5;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-info: #3B82F6;
+  --color-info-light: #DBEAFE;
+  
+  /* Neutrals - Refined Gray Scale */
+  --color-bg-base: #F8FAFC;
   --color-bg-elevated: #FFFFFF;
+  --color-bg-secondary: #F1F5F9;
+  --color-bg-tertiary: #E2E8F0;
   --color-bg-overlay: rgba(15, 23, 42, 0.6);
   --color-bg-hover: #F1F5F9;
   --color-bg-active: #E2E8F0;
@@ -29,25 +45,37 @@
   --color-border-subtle: #E2E8F0;
   --color-border-medium: #CBD5E1;
   --color-border-strong: #94A3B8;
+  --color-border-focus: var(--color-primary);
   
   --color-text-primary: #0F172A;
   --color-text-secondary: #475569;
-  --color-text-tertiary: #94A3B8;
+  --color-text-tertiary: #64748B;
+  --color-text-muted: #94A3B8;
   --color-text-disabled: #CBD5E1;
   --color-text-inverse: #FFFFFF;
   
   /* === GRADIENTS === */
-  --gradient-primary: linear-gradient(135deg, #306BAC 0%, #2B8BB0 100%);
-  --gradient-secondary: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
+  --gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+  --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
   --gradient-subtle: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  --gradient-hero: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F8FAFC 100%);
   
-  /* === SHADOWS === */
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 8px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 8px 16px rgba(15, 23, 42, 0.1), 0 4px 8px rgba(15, 23, 42, 0.08);
-  --shadow-xl: 0 16px 32px rgba(15, 23, 42, 0.12), 0 8px 16px rgba(15, 23, 42, 0.1);
-  --shadow-2xl: 0 24px 48px rgba(15, 23, 42, 0.15);
+  /* === SHADOWS - Refined Depth System === */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.2);
+  --shadow-inner: inset 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.25);
+  --shadow-primary-lg: 0 8px 24px rgba(37, 99, 235, 0.3);
+  
+  /* === FOCUS RING === */
+  --focus-ring: 0 0 0 3px var(--color-primary-100);
+  --focus-ring-error: 0 0 0 3px var(--color-error-light);
   
   /* === SPACING === */
   --space-1: 0.25rem;   /* 4px */
