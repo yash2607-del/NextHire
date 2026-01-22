@@ -11,8 +11,8 @@ services:
       - key: NODE_ENV
         value: production
       - key: CORS_ORIGIN
-        # Comma-separated list of allowed origins. The server also allows *.vercel.app.
-        value: https://your-vercel-domain.vercel.app
+        # Comma-separated list of allowed origins. Make sure this matches your Vercel frontend origin.
+        value: https://nexthire-snowy.vercel.app
       - key: JWT_SECRET
         sync: false
       - key: MONGO_URL
