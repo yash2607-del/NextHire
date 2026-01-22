@@ -119,10 +119,19 @@ JWT_SECRET=your_secure_jwt_secret
 
 ### Frontend (Vite) env
 
-The frontend reads the backend base URL from `VITE_API_URL` (the client app automatically appends `/api`).
+The frontend reads the backend base URL from `VITE_API_URL`.
 
-- Production is configured in `client/.env.production` to use your Render backend: `https://nexthire-hfj1.onrender.com`
-- Development is configured in `client/.env.development` to use `http://localhost:5000`
+- If you set `VITE_API_URL` to the server origin (e.g. `https://nexthire-hfj1.onrender.com`), the client will automatically target the API under `/api`.
+- If you set `VITE_API_URL` including `/api` (e.g. `https://nexthire-hfj1.onrender.com/api`), that also works.
+
+Defaults in this repo:
+
+- Production: `client/.env.production`
+- Development: `client/.env.development`
+
+Vercel recommendation:
+
+- Set `VITE_API_URL` in Vercel Project Settings → Environment Variables for both **Production** and **Preview** to `https://nexthire-hfj1.onrender.com/api`.
 
 Optional:
 
