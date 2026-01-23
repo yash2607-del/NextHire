@@ -1,7 +1,7 @@
 /* Recruiter Form Container */
 .recruiter-form-wrapper {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-primary-50, #EFF6FF) 0%, var(--color-primary-100, #DBEAFE) 100%);
+  background: linear-gradient(135deg, var(--color-primary-50, #EBF4FB) 0%, var(--color-primary-100, #C5DDF2) 100%);
   padding: 2rem;
   animation: fadeIn 0.6s ease;
 }
@@ -21,7 +21,7 @@
   background: white;
   border-radius: var(--radius-xl, 20px);
   padding: 3rem;
-  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 32px rgba(91, 155, 213, 0.15);
   animation: slideUp 0.7s ease;
 }
 
@@ -48,14 +48,14 @@
 .form-icon {
   width: 52px;
   height: 52px;
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
   border-radius: var(--radius-lg, 14px);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 1.75rem;
-  box-shadow: var(--shadow-primary, 0 4px 16px rgba(37, 99, 235, 0.3));
+  box-shadow: var(--shadow-primary, 0 4px 16px rgba(91, 155, 213, 0.3));
 }
 
 .form-title {
@@ -89,9 +89,9 @@
 }
 
 .btn-back-home:hover {
-  border-color: var(--color-primary, #2563EB);
-  background: var(--color-primary-50, #EFF6FF);
-  color: var(--color-primary, #2563EB);
+  border-color: var(--color-primary, #5B9BD5);
+  background: var(--color-primary-50, #EBF4FB);
+  color: var(--color-primary, #5B9BD5);
   transform: translateX(-4px);
 }
 
@@ -157,8 +157,8 @@
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: var(--color-primary, #2563EB);
-  box-shadow: var(--focus-ring, 0 0 0 4px rgba(37, 99, 235, 0.1));
+  border-color: var(--color-primary, #5B9BD5);
+  box-shadow: var(--focus-ring, 0 0 0 4px rgba(91, 155, 213, 0.1));
   transform: translateY(-1px);
 }
 
@@ -193,7 +193,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
   color: white;
   border-radius: 999px;
   font-size: 0.875rem;
@@ -250,8 +250,8 @@
 }
 
 .checkbox-item:hover {
-  border-color: var(--color-primary, #2563EB);
-  background: var(--color-primary-50, #EFF6FF);
+  border-color: var(--color-primary, #5B9BD5);
+  background: var(--color-primary-50, #EBF4FB);
   transform: translateX(4px);
 }
 
@@ -259,13 +259,13 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
-  accent-color: var(--color-primary, #2563EB);
+  accent-color: var(--color-primary, #5B9BD5);
 }
 
 .checkbox-item:has(input:checked) {
-  border-color: var(--color-primary, #2563EB);
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
-  box-shadow: var(--shadow-primary, 0 4px 12px rgba(37, 99, 235, 0.15));
+  border-color: var(--color-primary, #5B9BD5);
+  background: linear-gradient(135deg, rgba(91, 155, 213, 0.1) 0%, rgba(107, 168, 222, 0.1) 100%);
+  box-shadow: var(--shadow-primary, 0 4px 12px rgba(91, 155, 213, 0.15));
 }
 
 .checkbox-label {
@@ -327,14 +327,14 @@
 }
 
 .btn-form-primary {
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
   color: white;
   margin-left: auto;
 }
 
 .btn-form-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 8px 20px rgba(91, 155, 213, 0.4);
 }
 
 .btn-form-primary:disabled {

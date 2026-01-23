@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ApplicantSettings.css';
+import './RecruiterSettings.css';
 
-export default function ApplicantSettings() {
+export default function RecruiterSettings() {
   const navigate = useNavigate();
   const [settings, setSettings] = useState({
     // Profile Settings
     profileVisibility: 'public',
     showEmail: true,
     showPhone: false,
+    showCompanyDetails: true,
     
-    // Job Preferences
-    jobAlerts: true,
+    // Hiring Preferences
+    candidateAlerts: true,
     alertFrequency: 'daily',
-    remoteOnly: false,
-    salaryRange: 'any',
+    autoScreening: false,
+    experienceFilter: 'any',
     
     // Notifications
     emailNotifications: true,
-    applicationUpdates: true,
-    newJobMatches: true,
-    weeklyDigest: false,
+    newApplications: true,
+    candidateMessages: true,
+    weeklyReport: true,
     marketingEmails: false,
     
     // Privacy
-    allowRecruiterContact: true,
-    shareProfileWithCompanies: true,
+    allowDirectMessages: true,
+    shareJobsPublicly: true,
     
     // Appearance
     theme: 'light',
@@ -41,22 +42,20 @@ export default function ApplicantSettings() {
   };
 
   const handleSave = () => {
-    // Save to localStorage or API
-    localStorage.setItem('applicantSettings', JSON.stringify(settings));
+    localStorage.setItem('recruiterSettings', JSON.stringify(settings));
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
 
   useEffect(() => {
-    // Load saved settings
-    const savedSettings = localStorage.getItem('applicantSettings');
+    const savedSettings = localStorage.getItem('recruiterSettings');
     if (savedSettings) {
       setSettings(JSON.parse(savedSettings));
     }
   }, []);
 
   return (
-    <div className="applicant-settings">
+    <div className="recruiter-settings">
       {/* Header */}
       <div className="settings-page-header">
         <div className="settings-header-content">
@@ -68,7 +67,7 @@ export default function ApplicantSettings() {
           </div>
           <div>
             <h1 className="settings-page-title">Settings</h1>
-            <p className="settings-page-subtitle">Manage your account preferences and privacy</p>
+            <p className="settings-page-subtitle">Manage your recruiter account and preferences</p>
           </div>
         </div>
       </div>
@@ -87,14 +86,16 @@ export default function ApplicantSettings() {
             Profile Settings
           </button>
           <button 
-            className={`settings-nav-item ${activeSection === 'jobs' ? 'active' : ''}`}
-            onClick={() => setActiveSection('jobs')}
+            className={`settings-nav-item ${activeSection === 'hiring' ? 'active' : ''}`}
+            onClick={() => setActiveSection('hiring')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
-            Job Preferences
+            Hiring Preferences
           </button>
           <button 
             className={`settings-nav-item ${activeSection === 'notifications' ? 'active' : ''}`}
@@ -142,13 +143,13 @@ export default function ApplicantSettings() {
             <section className="settings-section">
               <div className="section-header">
                 <h2 className="section-title">Profile Settings</h2>
-                <p className="section-description">Control how your profile appears to recruiters</p>
+                <p className="section-description">Control how your recruiter profile appears</p>
               </div>
 
               <div className="settings-group">
                 <label className="settings-label">Profile Visibility</label>
                 <div className="radio-group">
-                  {['public', 'private', 'connections'].map(option => (
+                  {['public', 'private', 'verified'].map(option => (
                     <label key={option} className={`radio-option ${settings.profileVisibility === option ? 'selected' : ''}`}>
                       <input
                         type="radio"
@@ -161,7 +162,7 @@ export default function ApplicantSettings() {
                     </label>
                   ))}
                 </div>
-                <p className="settings-hint">Public profiles can be found by recruiters searching for candidates</p>
+                <p className="settings-hint">Public profiles allow candidates to view your company information</p>
               </div>
 
               <div className="settings-group">
@@ -185,33 +186,42 @@ export default function ApplicantSettings() {
                     <span className="checkbox-custom"></span>
                     <span className="checkbox-label">Show phone number on profile</span>
                   </label>
+                  <label className="checkbox-option">
+                    <input
+                      type="checkbox"
+                      checked={settings.showCompanyDetails}
+                      onChange={(e) => handleChange('showCompanyDetails', e.target.checked)}
+                    />
+                    <span className="checkbox-custom"></span>
+                    <span className="checkbox-label">Display company information</span>
+                  </label>
                 </div>
               </div>
             </section>
           )}
 
-          {/* Job Preferences Section */}
-          {activeSection === 'jobs' && (
+          {/* Hiring Preferences Section */}
+          {activeSection === 'hiring' && (
             <section className="settings-section">
               <div className="section-header">
-                <h2 className="section-title">Job Preferences</h2>
-                <p className="section-description">Customize your job search experience</p>
+                <h2 className="section-title">Hiring Preferences</h2>
+                <p className="section-description">Customize your recruitment workflow</p>
               </div>
 
               <div className="settings-group">
-                <label className="settings-label">Job Alerts</label>
+                <label className="settings-label">Candidate Alerts</label>
                 <label className="toggle-switch">
                   <input
                     type="checkbox"
-                    checked={settings.jobAlerts}
-                    onChange={(e) => handleChange('jobAlerts', e.target.checked)}
+                    checked={settings.candidateAlerts}
+                    onChange={(e) => handleChange('candidateAlerts', e.target.checked)}
                   />
                   <span className="toggle-slider"></span>
-                  <span className="toggle-label">Receive job alerts based on your profile</span>
+                  <span className="toggle-label">Receive alerts for matching candidates</span>
                 </label>
               </div>
 
-              {settings.jobAlerts && (
+              {settings.candidateAlerts && (
                 <div className="settings-group">
                   <label className="settings-label">Alert Frequency</label>
                   <select 
@@ -227,31 +237,32 @@ export default function ApplicantSettings() {
               )}
 
               <div className="settings-group">
-                <label className="settings-label">Work Type Preference</label>
+                <label className="settings-label">Auto-Screening</label>
                 <label className="checkbox-option">
                   <input
                     type="checkbox"
-                    checked={settings.remoteOnly}
-                    onChange={(e) => handleChange('remoteOnly', e.target.checked)}
+                    checked={settings.autoScreening}
+                    onChange={(e) => handleChange('autoScreening', e.target.checked)}
                   />
                   <span className="checkbox-custom"></span>
-                  <span className="checkbox-label">Show only remote jobs</span>
+                  <span className="checkbox-label">Enable AI-powered resume screening</span>
                 </label>
+                <p className="settings-hint">Automatically filter candidates based on job requirements</p>
               </div>
 
               <div className="settings-group">
-                <label className="settings-label">Expected Salary Range</label>
+                <label className="settings-label">Default Experience Filter</label>
                 <select 
                   className="settings-select"
-                  value={settings.salaryRange}
-                  onChange={(e) => handleChange('salaryRange', e.target.value)}
+                  value={settings.experienceFilter}
+                  onChange={(e) => handleChange('experienceFilter', e.target.value)}
                 >
-                  <option value="any">Any</option>
-                  <option value="0-30k">$0 - $30,000</option>
-                  <option value="30k-50k">$30,000 - $50,000</option>
-                  <option value="50k-80k">$50,000 - $80,000</option>
-                  <option value="80k-120k">$80,000 - $120,000</option>
-                  <option value="120k+">$120,000+</option>
+                  <option value="any">Any Experience</option>
+                  <option value="0-1">Entry Level (0-1 years)</option>
+                  <option value="1-3">Junior (1-3 years)</option>
+                  <option value="3-5">Mid-Level (3-5 years)</option>
+                  <option value="5-10">Senior (5-10 years)</option>
+                  <option value="10+">Expert (10+ years)</option>
                 </select>
               </div>
             </section>
@@ -283,37 +294,37 @@ export default function ApplicantSettings() {
                   <label className="checkbox-option">
                     <input
                       type="checkbox"
-                      checked={settings.applicationUpdates}
-                      onChange={(e) => handleChange('applicationUpdates', e.target.checked)}
+                      checked={settings.newApplications}
+                      onChange={(e) => handleChange('newApplications', e.target.checked)}
                     />
                     <span className="checkbox-custom"></span>
                     <div className="checkbox-content">
-                      <span className="checkbox-label">Application Updates</span>
-                      <span className="checkbox-hint">Get notified when your application status changes</span>
+                      <span className="checkbox-label">New Applications</span>
+                      <span className="checkbox-hint">Get notified when someone applies to your jobs</span>
                     </div>
                   </label>
                   <label className="checkbox-option">
                     <input
                       type="checkbox"
-                      checked={settings.newJobMatches}
-                      onChange={(e) => handleChange('newJobMatches', e.target.checked)}
+                      checked={settings.candidateMessages}
+                      onChange={(e) => handleChange('candidateMessages', e.target.checked)}
                     />
                     <span className="checkbox-custom"></span>
                     <div className="checkbox-content">
-                      <span className="checkbox-label">New Job Matches</span>
-                      <span className="checkbox-hint">Receive alerts for jobs matching your profile</span>
+                      <span className="checkbox-label">Candidate Messages</span>
+                      <span className="checkbox-hint">Receive alerts for candidate inquiries</span>
                     </div>
                   </label>
                   <label className="checkbox-option">
                     <input
                       type="checkbox"
-                      checked={settings.weeklyDigest}
-                      onChange={(e) => handleChange('weeklyDigest', e.target.checked)}
+                      checked={settings.weeklyReport}
+                      onChange={(e) => handleChange('weeklyReport', e.target.checked)}
                     />
                     <span className="checkbox-custom"></span>
                     <div className="checkbox-content">
-                      <span className="checkbox-label">Weekly Digest</span>
-                      <span className="checkbox-hint">Summary of job market and your activity</span>
+                      <span className="checkbox-label">Weekly Report</span>
+                      <span className="checkbox-hint">Summary of your hiring activity and analytics</span>
                     </div>
                   </label>
                   <label className="checkbox-option">
@@ -324,8 +335,8 @@ export default function ApplicantSettings() {
                     />
                     <span className="checkbox-custom"></span>
                     <div className="checkbox-content">
-                      <span className="checkbox-label">Marketing & Tips</span>
-                      <span className="checkbox-hint">Career tips, platform updates, and promotions</span>
+                      <span className="checkbox-label">Platform Updates</span>
+                      <span className="checkbox-hint">New features, tips, and platform news</span>
                     </div>
                   </label>
                 </div>
@@ -338,39 +349,39 @@ export default function ApplicantSettings() {
             <section className="settings-section">
               <div className="section-header">
                 <h2 className="section-title">Privacy Settings</h2>
-                <p className="section-description">Control who can see and contact you</p>
+                <p className="section-description">Control your data and visibility</p>
               </div>
 
               <div className="settings-group">
                 <label className="toggle-switch">
                   <input
                     type="checkbox"
-                    checked={settings.allowRecruiterContact}
-                    onChange={(e) => handleChange('allowRecruiterContact', e.target.checked)}
+                    checked={settings.allowDirectMessages}
+                    onChange={(e) => handleChange('allowDirectMessages', e.target.checked)}
                   />
                   <span className="toggle-slider"></span>
-                  <span className="toggle-label">Allow recruiters to contact me directly</span>
+                  <span className="toggle-label">Allow candidates to message you directly</span>
                 </label>
-                <p className="settings-hint">Recruiters can send you messages about job opportunities</p>
+                <p className="settings-hint">Candidates can send inquiries about your job postings</p>
               </div>
 
               <div className="settings-group">
                 <label className="toggle-switch">
                   <input
                     type="checkbox"
-                    checked={settings.shareProfileWithCompanies}
-                    onChange={(e) => handleChange('shareProfileWithCompanies', e.target.checked)}
+                    checked={settings.shareJobsPublicly}
+                    onChange={(e) => handleChange('shareJobsPublicly', e.target.checked)}
                   />
                   <span className="toggle-slider"></span>
-                  <span className="toggle-label">Share profile with partner companies</span>
+                  <span className="toggle-label">Make job postings publicly searchable</span>
                 </label>
-                <p className="settings-hint">Your profile may be recommended to relevant employers</p>
+                <p className="settings-hint">Your jobs will appear in search engines and job boards</p>
               </div>
 
               <div className="danger-zone">
                 <h3 className="danger-title">Danger Zone</h3>
                 <div className="danger-actions">
-                  <button className="btn-danger-outline">Download My Data</button>
+                  <button className="btn-danger-outline">Export All Data</button>
                   <button className="btn-danger">Delete Account</button>
                 </div>
               </div>

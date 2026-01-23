@@ -248,7 +248,7 @@ function Dashboard() {
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.transform = 'translateY(-4px)';
-                          e.currentTarget.style.boxShadow = '0 12px 24px rgba(37, 99, 235, 0.15)';
+                          e.currentTarget.style.boxShadow = '0 12px 24px rgba(91, 155, 213, 0.15)';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.transform = 'translateY(0)';
@@ -263,7 +263,7 @@ function Dashboard() {
                                   width: 40, 
                                   height: 40, 
                                   borderRadius: 10, 
-                                  background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)',
+                                  background: 'linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%)',
                                   display: 'flex',
                                   alignItems: 'center',
                                   justifyContent: 'center'
@@ -300,24 +300,24 @@ function Dashboard() {
                           </div>
                           
                           <div style={{
-                            background: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)',
+                            background: 'linear-gradient(135deg, #EBF4FB 0%, #C5DDF2 100%)',
                             padding: '1rem',
                             borderRadius: 12,
                             marginBottom: '1rem',
-                            border: '1px solid #BFDBFE'
+                            border: '1px solid #A3CBE8'
                           }}>
                             <div className="d-flex align-items-center gap-2">
                               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#1D4ED8" strokeWidth="2"/>
-                                <circle cx="9" cy="7" r="4" stroke="#1D4ED8" strokeWidth="2"/>
-                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="#1D4ED8" strokeWidth="2"/>
-                                <path d="M17 3.13C17.8604 3.35031 18.623 3.85071 19.1676 4.55232C19.7122 5.25392 20.0078 6.11683 20.0078 7.005C20.0078 7.89318 19.7122 8.75608 19.1676 9.45769C18.623 10.1593 17.8604 10.6597 17 10.88" stroke="#1D4ED8" strokeWidth="2"/>
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#4A8BC4" strokeWidth="2"/>
+                                <circle cx="9" cy="7" r="4" stroke="#4A8BC4" strokeWidth="2"/>
+                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="#4A8BC4" strokeWidth="2"/>
+                                <path d="M17 3.13C17.8604 3.35031 18.623 3.85071 19.1676 4.55232C19.7122 5.25392 20.0078 6.11683 20.0078 7.005C20.0078 7.89318 19.7122 8.75608 19.1676 9.45769C18.623 10.1593 17.8604 10.6597 17 10.88" stroke="#4A8BC4" strokeWidth="2"/>
                               </svg>
                               <div>
-                                <p className="mb-0" style={{ fontSize: 14, color: '#1D4ED8', fontWeight: 600 }}>
+                                <p className="mb-0" style={{ fontSize: 14, color: '#4A8BC4', fontWeight: 600 }}>
                                   {Array.isArray(job.applications) ? job.applications.length : 0} Applicants
                                 </p>
-                                <p className="mb-0" style={{ fontSize: 12, color: '#3B82F6' }}>
+                                <p className="mb-0" style={{ fontSize: 12, color: '#6BA8DE' }}>
                                   {Array.isArray(job.applications) && job.applications.length > 0 ? 'Review applications' : 'Waiting for applicants'}
                                 </p>
                               </div>
@@ -328,13 +328,13 @@ function Dashboard() {
                             <button 
                               className="btn btn-sm flex-grow-1" 
                               style={{ 
-                                background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)', 
+                                background: 'linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%)', 
                                 border: 'none',
                                 color: 'white',
                                 fontWeight: 600,
                                 borderRadius: 10,
                                 padding: '0.5rem 1rem',
-                                boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)'
+                                boxShadow: '0 4px 12px rgba(91, 155, 213, 0.2)'
                               }} 
                               onClick={() => handleViewApplicants(job._id)} 
                               aria-label={`View applicants for ${job.title}`}

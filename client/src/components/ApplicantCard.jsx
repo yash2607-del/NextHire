@@ -36,7 +36,7 @@ function ApplicantCard({ applicant, onStatusChange }) {
         border: '2px solid transparent'
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = '0 8px 24px rgba(37, 99, 235, 0.15)';
+        e.currentTarget.style.boxShadow = '0 8px 24px rgba(91, 155, 213, 0.15)';
         e.currentTarget.style.transform = 'translateY(-2px)';
         e.currentTarget.style.borderColor = '#e2e8f0';
       }}
@@ -53,7 +53,7 @@ function ApplicantCard({ applicant, onStatusChange }) {
               width: '56px',
               height: '56px',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)',
+              background: 'linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -89,7 +89,7 @@ function ApplicantCard({ applicant, onStatusChange }) {
               </svg>
               <a
                 href={`mailto:${email}`}
-                style={{ color: '#2563EB', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}
+                style={{ color: '#5B9BD5', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}
                 onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                 onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
               >
@@ -107,7 +107,7 @@ function ApplicantCard({ applicant, onStatusChange }) {
                   href={resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: '#2563EB', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}
+                  style={{ color: '#5B9BD5', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}
                   onMouseEnter={(e) => e.target.style.textDecoration = 'underline'}
                   onMouseLeave={(e) => e.target.style.textDecoration = 'none'}
                 >

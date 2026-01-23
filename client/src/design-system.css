@@ -5,23 +5,24 @@
    ======================================== */
 
 :root {
-  /* === BRAND COLORS - UNIFIED BLUE PALETTE === */
-  --color-primary: #2563EB;
-  --color-primary-hover: #1D4ED8;
-  --color-primary-dark: #1E40AF;
-  --color-primary-light: #EFF6FF;
-  --color-primary-50: #EFF6FF;
-  --color-primary-100: #DBEAFE;
-  --color-primary-200: #BFDBFE;
-  --color-primary-500: #3B82F6;
-  --color-primary-600: #2563EB;
-  --color-primary-700: #1D4ED8;
+  /* === BRAND COLORS - PREMIUM SAAS BLUE PALETTE === */
+  /* Softer, friendlier blue - inspired by modern SaaS products */
+  --color-primary: #5B9BD5;
+  --color-primary-hover: #4A8BC4;
+  --color-primary-dark: #3A7BB4;
+  --color-primary-light: #EBF4FB;
+  --color-primary-50: #EBF4FB;
+  --color-primary-100: #D6E9F7;
+  --color-primary-200: #B8D9F0;
+  --color-primary-500: #5B9BD5;
+  --color-primary-600: #4A8BC4;
+  --color-primary-700: #3A7BB4;
   
   /* Secondary & Accent */
-  --color-secondary: #8B5CF6;
-  --color-secondary-light: #EDE9FE;
-  --color-accent: #F59E0B;
-  --color-accent-light: #FEF3C7;
+  --color-secondary: #7C8DB5;
+  --color-secondary-light: #EEF1F7;
+  --color-accent: #F5A623;
+  --color-accent-light: #FEF5E0;
   
   /* Semantic Colors */
   --color-success: #10B981;
@@ -30,17 +31,17 @@
   --color-warning-light: #FEF3C7;
   --color-error: #EF4444;
   --color-error-light: #FEE2E2;
-  --color-info: #3B82F6;
-  --color-info-light: #DBEAFE;
+  --color-info: #5B9BD5;
+  --color-info-light: #EBF4FB;
   
   /* Neutrals - Refined Gray Scale */
-  --color-bg-base: #F8FAFC;
+  --color-bg-base: #FAFBFC;
   --color-bg-elevated: #FFFFFF;
-  --color-bg-secondary: #F1F5F9;
-  --color-bg-tertiary: #E2E8F0;
-  --color-bg-overlay: rgba(15, 23, 42, 0.6);
-  --color-bg-hover: #F1F5F9;
-  --color-bg-active: #E2E8F0;
+  --color-bg-secondary: #F4F6F8;
+  --color-bg-tertiary: #E8ECF0;
+  --color-bg-overlay: rgba(15, 23, 42, 0.5);
+  --color-bg-hover: #F4F6F8;
+  --color-bg-active: #E8ECF0;
   
   --color-border-subtle: #E2E8F0;
   --color-border-medium: #CBD5E1;
@@ -55,23 +56,23 @@
   --color-text-inverse: #FFFFFF;
   
   /* === GRADIENTS === */
-  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-  --gradient-primary-hover: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
-  --gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
-  --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
-  --gradient-subtle: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
-  --gradient-hero: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F8FAFC 100%);
+  --gradient-primary: linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #4A8BC4 0%, #5B9BD5 100%);
+  --gradient-secondary: linear-gradient(135deg, #7C8DB5 0%, #9AADD0 100%);
+  --gradient-accent: linear-gradient(135deg, #F5A623 0%, #F7B94D 100%);
+  --gradient-subtle: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+  --gradient-hero: linear-gradient(135deg, #FAFBFC 0%, #EBF4FB 50%, #FAFBFC 100%);
   
   /* === SHADOWS - Refined Depth System === */
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
-  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.2);
-  --shadow-inner: inset 0 2px 4px rgba(15, 23, 42, 0.04);
-  --shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.25);
-  --shadow-primary-lg: 0 8px 24px rgba(37, 99, 235, 0.3);
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.03);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(15, 23, 42, 0.03);
+  --shadow-primary: 0 4px 14px rgba(91, 155, 213, 0.3);
+  --shadow-primary-lg: 0 8px 24px rgba(91, 155, 213, 0.35);
   
   /* === FOCUS RING === */
   --focus-ring: 0 0 0 3px var(--color-primary-100);

@@ -119,6 +119,9 @@ export const clearAuth = () => {
   try {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
+    // Legacy keys used in older components
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   } catch (error) {
     console.error('Error clearing auth:', error);
   }
@@ -164,7 +167,8 @@ export const setupAxiosInterceptor = (axiosInstance) => {
       if (error.response?.status === 401) {
         // Token expired or invalid
         clearAuth();
-        window.location.href = '/login';
+        // App uses HashRouter; redirect to landing where Login/Signup are available
+        window.location.hash = '#/';
       }
       return Promise.reject(error);
     }

@@ -21,7 +21,7 @@
 
 .card .card-title {
 	text-align: center;
-	color: var(--color-primary, #2563EB);
+	color: var(--color-primary, #5B9BD5);
 	font-size: 1.75rem;
 	font-weight: var(--font-weight-bold, 700);
 	margin-top: var(--space-4, 1rem);
@@ -37,18 +37,18 @@
 }
 
 .card .btn-primary {
-	background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+	background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
 	border: none;
 	border-radius: var(--radius-lg, 12px);
 	padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
 	font-weight: var(--font-weight-semibold, 600);
-	box-shadow: var(--shadow-primary, 0 4px 14px rgba(37, 99, 235, 0.25));
+	box-shadow: var(--shadow-primary, 0 4px 14px rgba(91, 155, 213, 0.25));
 	transition: all 0.2s var(--ease-smooth);
 }
 
 .card .btn-primary:hover {
-	background: var(--gradient-primary-hover, linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%));
-	box-shadow: var(--shadow-primary-lg, 0 8px 24px rgba(37, 99, 235, 0.3));
+	background: var(--gradient-primary-hover, linear-gradient(135deg, #4A8BC4 0%, #5B9BD5 100%));
+	box-shadow: var(--shadow-primary-lg, 0 8px 24px rgba(91, 155, 213, 0.3));
 	transform: translateY(-1px);
 }
 

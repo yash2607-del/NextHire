@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./ApplicantLayout.css";
+import { clearAuth } from "../../utils/auth";
+import { ROUTES } from "../../config/routes";
 
 const navLinks = [
   { label: "Home", path: "/home", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" strokeWidth="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" strokeWidth="2"/></svg> },
@@ -38,9 +40,8 @@ export default function ApplicantLayout() {
           <button
             className="logout-btn"
             onClick={() => {
-              localStorage.removeItem("token");
-              localStorage.removeItem("user");
-              navigate("/");
+              clearAuth();
+              navigate(ROUTES.LANDING, { replace: true });
             }}
             aria-label="Logout"
           >

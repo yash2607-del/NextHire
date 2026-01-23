@@ -26,6 +26,8 @@ import ApplicantProfile from "./pages/applicant/ApplicantProfile";
 import Profile from "./pages/profile/Profile";
 import ApplicantSettings from "./pages/applicant/ApplicantSettings";
 import JobApply from "./pages/applicant/JobApply";
+import RecruiterProfile from "./pages/recruiter/RecruiterProfile";
+import RecruiterSettings from "./pages/recruiter/RecruiterSettings";
 import { RecruiterProvider } from "./context/RecruiterContext";
 import { A11yProvider } from "./context/A11yContext";
 import AccessibilityPanel from "./components/AccessibilityPanel";
@@ -53,8 +55,8 @@ function App() {
             <Route path="/recruiter/form/step4" element={<RecruiterProvider><RecForm4 /></RecruiterProvider>} />
             <Route path="/recruiter/form/review" element={<Review />} />
             <Route path="/recruiter/dashboard" element={<Dashboard />} />
-            <Route path="/recruiter/profile" element={<Profile />} />
-            <Route path="/recruiter/settings" element={<Settings />} />
+            <Route path="/recruiter/profile" element={<RecruiterProfile />} />
+            <Route path="/recruiter/settings" element={<RecruiterSettings />} />
             <Route path="/recruiter/jobs/:jobId" element={<ApplicantList />} />
             {/* Legacy routes for backward compatibility */}
             <Route path="/RecruiterForm" element={<RecruiterProvider><RecruiterForm /></RecruiterProvider>} />
@@ -63,8 +65,8 @@ function App() {
             <Route path="/RecForm4" element={<RecruiterProvider><RecForm4 /></RecruiterProvider>} />
             <Route path="/Review" element={<Review />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<RecruiterProfile />} />
+            <Route path="/settings" element={<RecruiterSettings />} />
           </Route>
           <Route element={<ApplicantLayout />}>
             <Route path="/applicant/dashboard" element={<ApplicantDashboard />} />

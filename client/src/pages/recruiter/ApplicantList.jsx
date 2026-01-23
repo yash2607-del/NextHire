@@ -82,7 +82,7 @@ function ApplicantList() {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#f1f5f9';
-              e.currentTarget.style.color = '#2563EB';
+              e.currentTarget.style.color = '#5B9BD5';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
@@ -135,9 +135,10 @@ function ApplicantList() {
                     outline: 'none',
                     transition: 'all 0.3s ease'
                   }}
-                  onFocus={(e) => e.target.style.borderColor = '#2563EB'}
+                  onFocus={(e) => e.target.style.borderColor = '#5B9BD5'}
                   onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
                 />
+                
               </div>
             </div>
 
@@ -152,7 +153,7 @@ function ApplicantList() {
                     borderRadius: '999px',
                     border: filterStatus === status ? 'none' : '2px solid #e2e8f0',
                     background: filterStatus === status
-                      ? (status === 'shortlisted' ? '#10b981' : status === 'rejected' ? '#ef4444' : 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)')
+                      ? (status === 'shortlisted' ? '#10b981' : status === 'rejected' ? '#ef4444' : 'linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%)')
                       : 'white',
                     color: filterStatus === status ? 'white' : '#64748b',
                     fontSize: '0.875rem',

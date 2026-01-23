@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "../applicant/ApplicantLayout.css";
+import { clearAuth } from "../../utils/auth";
+import { ROUTES } from "../../config/routes";
 
 const navLinks = [
   { label: "My Jobs", path: "/recruiter/dashboard", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="16" height="20" stroke="currentColor" strokeWidth="2"/><path d="M9 22V18H15V22M9 6H11M9 10H11M9 14H11M15 6H13M15 10H13M15 14H13" stroke="currentColor" strokeWidth="2"/></svg> },
@@ -37,9 +39,8 @@ function RecruiterLayout() {
           <button
             className="logout-btn"
             onClick={() => {
-              localStorage.removeItem("token");
-              localStorage.removeItem("user");
-              navigate("/");
+              clearAuth();
+              navigate(ROUTES.LANDING, { replace: true });
             }}
             aria-label="Logout"
           >

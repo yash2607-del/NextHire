@@ -1,15 +1,17 @@
 import Card from './Card'
+import './Features.css'
 
 
 function Features() {
   return (
-    <section id="features" role="region" aria-labelledby="features-heading" className="py-5">
-      <div className="d-flex flex-column justify-content-center align-items-center text-center">
-        <h2 id="features-heading" className="feature-heading text-primary fs-1 fw-bold">Connect. Hire. Grow.</h2>
-        <p className="feature-subheading text-primary fs-5 fw-semibold mb-5">"Connecting Top Talent with the Right Employers Effortlessly."</p>
+    <section id="features" role="region" aria-labelledby="features-heading" className="features-section">
+      <div className="features-header">
+        <span className="features-badge">FEATURES</span>
+        <h2 id="features-heading" className="features-title">Experience that grows with your career</h2>
+        <p className="features-description">An accessible platform that puts you in control of your job search journey.</p>
       </div>
 
-      <div className="d-flex justify-content-center align-items-stretch flex-wrap gap-4 container-fluid px-4" aria-label="Platform features">
+      <div className="features-grid" aria-label="Platform features">
         <Card
           icon="🔍"
           title="Smart Job Matching"

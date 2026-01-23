@@ -87,14 +87,14 @@
 .modal-company-icon {
   width: 64px;
   height: 64px;
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
   border-radius: var(--radius-xl, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   flex-shrink: 0;
-  box-shadow: var(--shadow-primary, 0 4px 14px rgba(37, 99, 235, 0.25));
+  box-shadow: var(--shadow-primary, 0 4px 14px rgba(91, 155, 213, 0.25));
 }
 
 .modal-header-text {
@@ -172,7 +172,7 @@
 }
 
 .modal-meta-item svg {
-  color: var(--color-primary, #2563EB);
+  color: var(--color-primary, #5B9BD5);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -230,17 +230,17 @@
 
 .skill-tag {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, var(--color-primary-100, #DBEAFE) 0%, var(--color-primary-50, #EFF6FF) 100%);
-  color: var(--color-primary, #2563EB);
+  background: linear-gradient(135deg, var(--color-primary-100, #C5DDF2) 0%, var(--color-primary-50, #EBF4FB) 100%);
+  color: var(--color-primary, #5B9BD5);
   border-radius: var(--radius-md, 10px);
   font-size: 0.875rem;
   font-weight: 600;
-  border: 1px solid var(--color-primary-200, #BFDBFE);
+  border: 1px solid var(--color-primary-200, #A3CBE8);
   transition: all var(--transition-fast, 0.15s ease);
 }
 
 .skill-tag:hover {
-  background: linear-gradient(135deg, var(--color-primary-200, #BFDBFE) 0%, var(--color-primary-100, #DBEAFE) 100%);
+  background: linear-gradient(135deg, var(--color-primary-200, #A3CBE8) 0%, var(--color-primary-100, #C5DDF2) 100%);
   transform: translateY(-1px);
 }
 
@@ -269,15 +269,15 @@
 }
 
 .modal-btn-primary {
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
   color: white;
-  box-shadow: var(--shadow-primary, 0 4px 12px rgba(37, 99, 235, 0.3));
+  box-shadow: var(--shadow-primary, 0 4px 12px rgba(91, 155, 213, 0.3));
 }
 
 .modal-btn-primary:hover {
-  background: linear-gradient(135deg, var(--color-primary-700, #1D4ED8) 0%, var(--color-primary, #2563EB) 100%);
+  background: linear-gradient(135deg, var(--color-primary-700, #4A8BC4) 0%, var(--color-primary, #5B9BD5) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 6px 16px rgba(91, 155, 213, 0.4);
 }
 
 .modal-btn-secondary {

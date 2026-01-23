@@ -62,20 +62,20 @@
   top: 0;
   height: 100%;
   width: 3px;
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
   transform: scaleY(0);
   transition: transform var(--transition-normal, 0.3s ease);
 }
 
 .sidebar-link:hover {
   background: #f1f5f9;
-  color: var(--color-primary, #2563EB);
+  color: var(--color-primary, #5B9BD5);
   transform: translateX(4px);
 }
 
 .sidebar-link.active {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
-  color: var(--color-primary, #2563EB);
+  background: linear-gradient(135deg, rgba(91, 155, 213, 0.1) 0%, rgba(107, 168, 222, 0.1) 100%);
+  color: var(--color-primary, #5B9BD5);
   font-weight: 600;
 }
 

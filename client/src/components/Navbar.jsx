@@ -98,7 +98,7 @@ function Navbar() {
                   <Link to={ROUTES.LOGIN} className="btn btn-light px-4 rounded-pill nav-btn-animate">
                     Log in
                   </Link>
-                  <Link to={ROUTES.SIGNUP} className="btn btn-primary px-4 rounded-pill nav-btn-animate" style={{background: 'linear-gradient(135deg, #2563EB 0%, #3B82F6 100%)', border: 'none'}}>
+                  <Link to={ROUTES.SIGNUP} className="btn btn-primary px-4 rounded-pill nav-btn-animate" style={{background: 'linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%)', border: 'none'}}>
                     Start Now
                   </Link>
                 </>

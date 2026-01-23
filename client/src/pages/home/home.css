@@ -23,7 +23,7 @@
 /* CTA Section */
 .cta-section {
   padding: 5rem 0;
-  background: var(--gradient-primary, linear-gradient(135deg, #2563EB 0%, #3B82F6 100%));
+  background: var(--gradient-primary, linear-gradient(135deg, #5B9BD5 0%, #6BA8DE 100%));
 }
 
 .cta-card {
@@ -57,7 +57,7 @@
 
 .cta-btn-primary {
   background: var(--color-bg-elevated, #FFFFFF);
-  color: var(--color-primary, #2563EB);
+  color: var(--color-primary, #5B9BD5);
   padding: var(--space-4, 1rem) var(--space-8, 2rem);
   border-radius: var(--radius-xl, 16px);
   font-weight: var(--font-weight-semibold, 600);
@@ -72,7 +72,7 @@
 .cta-btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(15, 23, 42, 0.08));
-  color: var(--color-primary-hover, #1D4ED8);
+  color: var(--color-primary-hover, #4A8BC4);
 }
 
 .cta-btn-outline {
@@ -110,12 +110,12 @@
   display: inline-block;
   font-size: var(--font-size-xs, 0.75rem);
   font-weight: var(--font-weight-semibold, 600);
-  color: var(--color-primary, #2563EB);
-  background: var(--color-primary-light, #EFF6FF);
+  color: var(--color-primary, #5B9BD5);
+  background: var(--color-primary-light, #EBF4FB);
   padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
   border-radius: var(--radius-full, 9999px);
   margin-bottom: var(--space-4, 1rem);
-  border: 1px solid var(--color-primary-100, #DBEAFE);
+  border: 1px solid var(--color-primary-100, #C5DDF2);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
