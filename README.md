@@ -166,24 +166,3 @@ npm install
 npm run dev
 ```
 
-Run frontend and backend in separate terminals.
-
-## 🔁 Running Concurrently
-
-Use two terminals, or use process managers such as `concurrently` or `pm2`.
-
-## 🔒 Security Notes
-
-- Never commit `.env` files
-- Rotate credentials immediately if exposed
-- Enforce role-based access for recruiter actions
-- Validate and sanitize all inputs
-- Use environment variables for all secrets
-
-## 🤝 Contributing
-
-- Create issues for bugs or enhancements
-- Fork the repository
-- Use feature-based branches
-- Keep commits small and descriptive
-- Open pull requests with clear explanations
